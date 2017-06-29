@@ -1,0 +1,48 @@
+<?php
+$optionsRender = function($key) use ($options) {
+    if (isset($options[$key])) {
+        return $options[$key];
+    } else {
+        return '';
+    }
+};
+?>
+
+<div class="footer">
+    <div class="container">
+        <div class="cssmenu wow fadeInLeft" data-wow-delay="0.4s">
+            <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="profiles.html">Add Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="copy wow fadeInUp" data-wow-delay="0.4s">
+            <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://www.freemoban.com/">www.freemoban.com</a></p>
+        </div>
+        <div class="social wow fadeInRight" data-wow-delay="0.4s">
+            <ul class="footer_social">
+                <li><a href="#"> <i class="fb"> </i> </a></li>
+                <li><a href="#"> <i class="tw"> </i> </a></li>
+            </ul>
+        </div>
+        <div class='clearfix'> </div>
+    </div>
+</div>
+
+<?php echo  Base\Tools::script($optionsRender('script'));?>
+
+<script type="text/javascript">
+    $(window).load(function(){
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function(slider){
+                $('body').removeClass('loading');
+            }
+        });
+    });
+</script>
+<script>
+    new WOW().init();
+</script>
