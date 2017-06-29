@@ -4,14 +4,14 @@
  * @desc sample数据获取类, 可以访问数据库，文件，其它系统等
  * @author root
  */
-//namespace library;
+namespace models\Aa;
 
-class Sample{
+class SampleModel{
     public function __construct() {
     }   
     
     public function selectSample() {
-        return 'LIBARY Hello World!';
+        return 'AAAAAAAAAAA   AAAAAAAAAA  Model  Aa ';
     }
 
     public function insertSample($arrInfo) {

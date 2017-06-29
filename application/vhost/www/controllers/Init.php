@@ -1,5 +1,5 @@
 <?php
-use  controllers\Traits\StaticConf;
+use  vhost\www\controllers\Traits\StaticConf;
 
 use Base\Base;
 
@@ -25,6 +25,7 @@ class InitController extends Yaf\Controller_Abstract {
     public function init(){
         // 关闭自动渲染模板
         //Yaf\Dispatcher::getInstance()->disableView();
+        Yaf\Dispatcher::getInstance()->disableView();
         $this->_req = $this->getRequest();
         $this->assignStatic();
         $this->assignDefaultData();

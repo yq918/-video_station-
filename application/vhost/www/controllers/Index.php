@@ -7,10 +7,10 @@
  */
 
 //use library\Aa\Cb;
-use Aa\Bb;
-use Aa\SampleModel;
+use Aa\Bb;           //libary
+use Base\Tools;     //libary
+use models\Aa\SampleModel; //models  
 
-use Base\Tools;
 
 
 
@@ -27,6 +27,8 @@ class IndexController extends InitController {
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
 	public function indexAction($name = "Stranger") {
+ 
+ 
 		//1. fetch query
 		$get = $this->getRequest()->getQuery("get", "default value");
 
@@ -41,17 +43,20 @@ class IndexController extends InitController {
 		 $model = new SampleModel();  //这里加载的是MODELS目录中的文件
 	   //  echo "<br/>models:".$model->selectSample();
 
-		 $lib = new Sample();  // 这里加载的是LIBRARY中的文件
-	   //  echo 	"<br/>library:".$lib->selectSample();
+	 
 
 		//3. assign
 		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name);
 
-	  // $this->getView()->display(APPLICATION_PATH . '/application/views/index/index.phtml');
+		//$this->getView()->_tpl_dir=VIEWPATH;
+
+		//var_dump($this->getView());exit;
+ 
+	    $this->getView()->display(VIEWPATH.'/www/index/index.phtml');
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
-        return true;
+        //return true;
 	}
 
 

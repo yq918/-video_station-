@@ -1,5 +1,5 @@
 <?php
-namespace controllers\Traits;
+namespace vhost\www\controllers\Traits;
 
 trait StaticConf{
     public  function options($node_case='',$flag='desktop',$append=array()){
