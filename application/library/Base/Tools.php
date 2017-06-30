@@ -32,7 +32,7 @@ class Tools
          }
             $styleArray = array_map(function ($aliases) use ($cssTag,$static_url) {
                 $cssUrl =  $static_url.$aliases;
-                return '<link href="' . $cssUrl . $cssTag . '" rel="stylesheet" onerror="_cdnFallback(this)" />';
+                return '<link href="' . $cssUrl . $cssTag . '" rel="stylesheet"  media="all" onerror="_cdnFallback(this)" />';
             }, $res);
              if(!is_array($styleArray)){
                  return '';

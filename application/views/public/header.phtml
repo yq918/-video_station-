@@ -7,23 +7,22 @@ $optionsRender = function($key) use ($options) {
         return '';
     }
 };
-?>
+?> 
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title><?php echo $optionsRender('title')?></title>
-    <meta name="description" content="<?php echo $optionsRender('description')?>">
-    <meta name="keywords" content="<?php echo $optionsRender('keywords')?>">
-    <?php echo    Base\Tools::style($optionsRender('style'));?>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?php echo $optionsRender('title')?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="<?php echo $optionsRender('keywords')?>" />
+<meta name="description" content="<?php echo $optionsRender('description')?>">
+<script type="application/x-javascript"> 
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script> 
 
-    <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
-        function hideURLbar(){
-            window.scrollTo(0,1);
-        }
-    </script>
-
+ <?php echo Base\Tools::style($optionsRender('style'));?>
 </head>
+
+
+
+

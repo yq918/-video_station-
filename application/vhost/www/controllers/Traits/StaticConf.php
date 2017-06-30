@@ -6,23 +6,29 @@ trait StaticConf{
           $option =  array(
                'comm' => array(
                    'style' => array(
-                       '/css/common/bootstrap.css',
+                      // '/css/common/bootstrap.css',
                    ),
                    'script' => array(
-                       '/js/common/jquery-1.11.1.min.js'
+                       //'/js/common/jquery-1.11.1.min.js'
                       )
                ),
+
                 'index_index' => array(
                      'style' => array(
-                         '/css/index/style.css',
-                         '/css/index/flexslider.css',
-                         '/css/index/animate.css',
-                         '/css/common/Montserrat.css',
+                         '/css/bootstrap.min.css',
+                         '/css/dashboard.css',
+                         '/css/style.css',
+                         '/fonts/open_sans.css',
+                         '/fonts/poiret_one.css',
+                         '/css/popuo-box.css'
                      ),
                     'script' => array(
-                           '/js/common/jquery.easydropdown.js',
-                           '/js/common/jquery.flexslider.js',
-                           '/js/index/wow.min.js'
+                            '/js/jquery-1.11.1.min.js',
+                            '/js/modernizr.custom.min.js',
+                            '/js/jquery.magnific-popup.js',
+                            '/js/responsiveslides.min.js', 
+                            '/js/bootstrap.min.js',
+
                     ),
                     'title' => '开心一刻',
                     'keywords' => '',
