@@ -15,7 +15,7 @@ import requests
 def find_sec():  
     url = "https://www.youtube.com/feed/trending"
     pa=re.compile(r'\w+')
-    browser = webdriver.Firefox() # Get local session of firefox  
+    browser = webdriver.PhantomJS() # Get local session of firefox  
     browser.get(url) # Load page  
     time.sleep(1)    # Let the page load  
     result=[]  
@@ -29,18 +29,20 @@ def find_sec():
               video_time_len = len(video_time_tag)
               video_time_txt='' 
               for k in range(0,video_time_len):
-                   video_time_txt = video_time_tag[k].text
+                   video_time_txt = video_time_tag[k].text.encode('utf-8')
               #播放时长 end 
               
               #更新时间与播放次数 start
               update_time_tag = board[i].find_elements_by_class_name('yt-lockup-meta-info') 
-              update_time_txt = update_time_tag[0].text
+              update_time_txt = update_time_tag[0].text.encode('utf-8')
               #更新时间与播放次数 end
               
               #查找图片地址 start              
               imglist = board[i].find_elements_by_tag_name('img')
               imglen  = len(imglist)
               for key in range(0,imglen):                   
+                   if imglist[key].get_attribute('src').find('?sqp') == -1:
+                      continue
                    img_src = imglist[key].get_attribute('src')
               #查找图片地址 end 
                        
@@ -48,7 +50,7 @@ def find_sec():
               for j in range(0,board_url_len): 
               	if board_title[j].get_attribute('title') =='' or board_title[j].get_attribute('href').find("watch") == -1:
               	   continue              	   
-              	result.append([board_title[j].get_attribute('href'),board_title[j].get_attribute('title'),video_time_txt,update_time_txt,img_src])
+              	result.append([board_title[j].get_attribute('href'),board_title[j].get_attribute('title').encode('utf-8'),video_time_txt,update_time_txt,img_src])
 
         browser.close()  
         return result  
