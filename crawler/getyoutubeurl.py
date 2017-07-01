@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Date    : 2016-02-28 20:17:55
 # @desc    : 获取youtube 地址分析出视频URL
-# @Author  : Raymond Wong (549425036@qq.com)
+# @Author  : zxr (strive965432@gmail.com)
 # @Link    : github/Raymond-Wong
 
 from selenium import webdriver  
@@ -15,7 +15,7 @@ import requests
 def find_sec():  
     url = "https://www.youtube.com/feed/trending"
     pa=re.compile(r'\w+')
-    browser = webdriver.PhantomJS() # Get local session of firefox  
+    browser = webdriver.Firefox() # Get local session of firefox  
     browser.get(url) # Load page  
     time.sleep(1)    # Let the page load  
     result=[]  
@@ -47,9 +47,12 @@ def find_sec():
               #查找图片地址 end 
                        
               board_url_len=len(board_title)
-              for j in range(0,board_url_len): 
-              	if board_title[j].get_attribute('title') =='' or board_title[j].get_attribute('href').find("watch") == -1:
-              	   continue              	   
+              for j in range(0,board_url_len):
+                video_title =  board_title[j].get_attribute('title').encode('utf-8')
+                video_href  =  board_title[j].get_attribute('href')
+              	if video_title =='' or video_href.find("watch") == -1:
+              	   continue
+                requests.get(url='http://video.colsole.13520v.cc/crawler/youtube/savedata.php', params={'video_url':video_href,'video_title':video_title,'play_duration':video_time_txt,'video_time_content':update_time_txt,'video_cover':img_src}) 
               	result.append([board_title[j].get_attribute('href'),board_title[j].get_attribute('title').encode('utf-8'),video_time_txt,update_time_txt,img_src])
 
         browser.close()  
