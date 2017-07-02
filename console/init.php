@@ -6,6 +6,11 @@ define('SITEBASE', $basepath);
 define('BASEPATH',SITEBASE.'console');
 define('VIDEO_PATH','/data/video/');
 
+define('ERR_LOG',VIDEO_PATH.'/bilibili/log/err.log');
+define('ERR_DB_LOG',VIDEO_PATH.'/bilibili/log/db_err.log'); 
+define('INTERFACELOG',VIDEO_PATH.'/bilibili/log/interface.log');
+
+
 function load($class)
 { 
     $file = '';
