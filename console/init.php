@@ -1,6 +1,22 @@
 <?php 
 include (__DIR__.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
-$connectionParams = include __DIR__.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'db.php';
-$config = new \Doctrine\DBAL\Configuration();  
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
- 
+
+$basepath = realpath(dirname(__FILE__).'/../') . '/'; 
+define('SITEBASE', $basepath);
+define('BASEPATH',SITEBASE.'console');
+
+function load($class)
+{ 
+    $file = '';
+    if(!empty($class)){
+        $classFile = str_replace('\\',DIRECTORY_SEPARATOR,$class);
+        $file  = BASEPATH.DIRECTORY_SEPARATOR.$classFile.'.php';
+    }   
+    if(!empty($file) && file_exists($file)){
+         require $file;
+    }
+}
+spl_autoload_register('load');
+
+
+
