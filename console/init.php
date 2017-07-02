@@ -4,6 +4,7 @@ include (__DIR__.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php'
 $basepath = realpath(dirname(__FILE__).'/../') . '/'; 
 define('SITEBASE', $basepath);
 define('BASEPATH',SITEBASE.'console');
+define('VIDEO_PATH','/data/video/');
 
 function load($class)
 { 

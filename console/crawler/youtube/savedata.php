@@ -28,7 +28,7 @@ class saveData{
 	$conn = db::getinstance();
 	$result  = $conn->insert('youtube', $data);
 	return $result; 
-	  } 
+  } 
 }
 
 $class = new saveData();
