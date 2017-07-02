@@ -1074,4 +1074,10 @@ array (
   'video_title' => 'World of Dance 2017 - Les Twins: The Duels (Full Performance)',
   'video_url' => 'https://www.youtube.com/watch?v=0Bs76OjaDSE',
   'video_time_content' => '3 天前960,709次观看',
+)array (
+  'video_cover' => 'https://i.ytimg.com/vi/kFQUlA-G0N4/hqdefault.jpg?sqp=-oaymwEWCMQBEG5IWvKriqkDCQgBFQAAiEIYAQ==&rs=AOn4CLDw7ZBl6ob0wqnCgRydGMJOIhZTPg',
+  'play_duration' => '8:52',
+  'video_title' => 'THE MOST FAMOUS THAI RESTAURANT IN AMERICA?! - Fung Bros Food',
+  'video_url' => 'https://www.youtube.com/watch?v=snKwYmQ-k-M',
+  'video_time_content' => '1 天前56,415次观看',
 )
