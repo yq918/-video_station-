@@ -19,9 +19,12 @@ def find_sec():
             board_url=board[i].find_elements_by_class_name('cover-preview')
             board_title=board[i].find_elements_by_tag_name('img')
             board_url_len=len(board_url)
-            for j in range(0,board_url_len): 
-                result.append([board_title[j].get_attribute('alt').encode('utf-8'),board_url[j].get_attribute('href')])
-                r = requests.get(url='http://localhost/php/save.php', params={'title':board_title[j].get_attribute('alt').encode('utf-8'),'href':board_url[j].get_attribute('href')})   #å
+            for j in range(0,board_url_len):
+                video_img   = board_title[j].get_attribute('data-img')
+                video_title = board_title[j].get_attribute('alt').encode('utf-8')
+                video_href  = board_url[j].get_attribute('href')
+                result.append([video_title,video_href,video_img])
+                r = requests.get(url='http://localhost/php/save.php', params={'title':video_title,'href':video_href,'video_img':video_img})   #å
                 args=["phantomjs","/home//getvideourl.js",board_url[j].get_attribute('href')]
                 retcode=subprocess.call(args) 
                 print(retcode)
