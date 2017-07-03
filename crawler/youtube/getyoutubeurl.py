@@ -52,7 +52,7 @@ def find_sec():
                 video_href  =  board_title[j].get_attribute('href')
                 if video_title =='' or video_href.find("watch") == -1:
               	   continue
-                requests.get(url='http://colsole.13520v.com/crawler/youtube/savedata.php', params={'video_url':video_href,'video_title':video_title,'play_duration':video_time_txt,'video_time_content':update_time_txt,'video_cover':img_src}) 
+                requests.get(url='localhost/console/youtube/savedata.php', params={'video_url':video_href,'video_title':video_title,'play_duration':video_time_txt,'video_time_content':update_time_txt,'video_cover':img_src}) 
                 result.append([board_title[j].get_attribute('href'),board_title[j].get_attribute('title').encode('utf-8'),video_time_txt,update_time_txt,img_src])
 
         browser.close()  
