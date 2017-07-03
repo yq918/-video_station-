@@ -8,7 +8,7 @@ include '../../init.php';
 use models\db\db;
 class saveData{
   public function run()
-  {  	 
+  {  	
   	file_put_contents('./get.log',var_export($_REQUEST,true),FILE_APPEND); 
 	if(empty($_REQUEST)){
 		  exit('数据为空');
@@ -24,7 +24,7 @@ class saveData{
 	$str = str_replace(',','',$data['video_time_content']); 
 	preg_match_all('/\d+/is',$str,$arr); 
 	$data['playback_times']    = isset($arr[0][1]) ? $arr[0][1] : 0; 
-	$data['add_time'] = time(); 
+	$data['add_time'] = time();
 	$conn = db::getinstance();
 	$result  = $conn->insert('youtube', $data);
 	return $result; 
