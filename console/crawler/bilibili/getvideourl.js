@@ -1,7 +1,12 @@
+/**
+ * [system description]
+ * @type {[type]}
+ * 传入一个B站的视频地址，获取到interface接口并写入文件 
+ * @author  zxr 
+ */
 var system = require('system');
 var page = require('webpage').create();
 var fs = require('fs');
-
 var url = system.args[1];  
 
 

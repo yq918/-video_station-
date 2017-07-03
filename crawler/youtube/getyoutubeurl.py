@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-28 20:17:55
+# @Date    : 2017-07-03 20:17:55
 # @desc    : 获取youtube 地址分析出视频URL
 # @Author  : zxr (strive965432@gmail.com)
-# @Link    : github/Raymond-Wong
+
 
 from selenium import webdriver  
 from selenium.common.exceptions import NoSuchElementException  

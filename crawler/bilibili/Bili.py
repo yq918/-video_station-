@@ -1,4 +1,9 @@
-# -*- coding: UTF-8 -*-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2016-02-28 20:17:55
+# @desc    : 获取B站视频地址并保存到数据库中
+# @Author  : zxr (strive965432@gmail.com)
+# 
 from selenium import webdriver  
 from selenium.common.exceptions import NoSuchElementException  
 import time  
@@ -24,8 +29,8 @@ def find_sec():
                 video_title = board_title[j].get_attribute('alt').encode('utf-8')
                 video_href  = board_url[j].get_attribute('href')
                 result.append([video_title,video_href,video_img])
-                r = requests.get(url='http://localhost/php/save.php', params={'title':video_title,'href':video_href,'video_img':video_img})   #�
-                args=["phantomjs","/home//getvideourl.js",board_url[j].get_attribute('href')]
+                r = requests.get(url='http://localhost/php/save.php', params={'title':video_title,'href':video_href,'video_img':video_img})   #å
+                args=["phantomjs","/home/getvideourl.js",board_url[j].get_attribute('href')]
                 retcode=subprocess.call(args) 
                 print(retcode)
                 time.sleep(1) # Let the page load  
