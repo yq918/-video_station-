@@ -27,7 +27,7 @@ class qiliu{
                  }
                  $urlInfo = parse_url($video_img);
                  $pathArr = explode('/',$urlInfo['path']);
-                 $file_name; = array_pop($pathArr);
+                 $file_name = array_pop($pathArr);
                  $file_path = $dir.'/'.$file_name;                  
                  $call = "axel -n 2 -o  {$file_path}  {$video_img}";  
 
@@ -43,7 +43,7 @@ class qiliu{
   }
 }
 
-$class = new download();
+$class = new qiliu();
 $class->run();
 
  
