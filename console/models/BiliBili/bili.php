@@ -21,7 +21,8 @@ class bili{
      {
 
       $result  = $this->conn->insert($this->table, $data);
-      return $result;
+
+     return $this->conn->lastInsertId(); 
      }
 
 
@@ -43,7 +44,7 @@ class bili{
    public function addVideos($data)
    {
      $result  = $this->conn->insert($this->video_table, $data);
-     return $result;
+     return $this->conn->lastInsertId(); 
    }
 
 

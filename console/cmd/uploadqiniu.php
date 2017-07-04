@@ -73,21 +73,29 @@ public function uploadVideo()
       if(empty($video_path)){
           continue;
       } 
-      if(file_exists($video_path)){
+  /*    if(file_exists($video_path)){
            //上传七牛
             $pathArr   =  explode('/',$video_path);
             $file_name =  array_pop($pathArr);
             $ret =  $Upload -> upload_file('bilibili-videos',$video_path,$file_name);                     
-       } 
-          $where =  sprintf("t_id = %d",$value['id']);
+       }
+*/
+
+            $pathArr   =  explode('/',$video_path);
+            $file_name =  array_pop($pathArr);
+          
+          $ret = true;
+
+
+          $where   =  sprintf("t_id = %d",$value['id']);
           $imgData = $bill->getImages('id',$where);
-          $img_id  = $imgData[0]['id'];
+          $img_id  = isset($imgData[0]['id']) ? $imgData[0]['id'] : 0;
          //写进数据库    
            $db_data = array(
                  't_id'       => $value['id'],
                  'img_id'     => $img_id,
-                 'image_path' => $file_path,
-                 'image_name' => $file_name 
+                 'video_path' => $video_path,
+                 'video_name' => $file_name 
               );  
               if($ret){
                   $db_data['is_qiniu'] = 1;
@@ -102,8 +110,8 @@ public function uploadVideo()
                   );
                 $where = array('id' => $value['id']);
                 $bill->updateBiliBili($up_data,$where);
-                $data['v_id'] =    $v_id;
-                $bill->updateBiliImage($data,$where); 
+                $updata['v_id'] =    $v_id;
+                $bill->updateBiliImage($updata,$where); 
             }
 
     } 
