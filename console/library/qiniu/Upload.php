@@ -23,7 +23,7 @@ class Upload
 		$auth = new Auth($accessKey, $secretKey);
 
 		// 要上传的空间
-		$bucket = 'images';
+		//$bucket = 'images';
 
 		// 生成上传 Token
 		$token = $auth->uploadToken($bucket); 

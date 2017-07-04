@@ -21,7 +21,6 @@ class qiliu{
   	}  
 
     $Upload = new Upload();
-
          foreach ($data as $key => $value) {
   	       $video_img = $value['video_img'];
   	       if(!empty($video_img)){
@@ -37,11 +36,11 @@ class qiliu{
                  $file_path = $dir.'/'.$file_name;                  
                  $call = "axel -n 2 -o  {$file_path}  {$video_img}";                   
                  exec($call,$array); //执行命令
-	               usleep(1000);
+	         usleep(1000);
                  if(file_exists($file_path)){
                   //上传七牛
-                  $Upload -> upload_file($dirname,$file_path,$file_name);
-                   
+                     $Upload -> upload_file('bilibili-images',$file_path,$file_name);
+                     var_dump($a);
                  }
                
 
@@ -52,9 +51,7 @@ class qiliu{
   }
 }
 
+ 
 $class = new qiliu();
 $class->run();
-
- 
-
 
