@@ -9,13 +9,13 @@ include '../config/conf.php';
 
 use models\db\db;
 use library\qiniu\Upload;
-use models\BiliBili\bill;
+use models\BiliBili\bili;
 
 class qiliu{ 
   public function run()
   { 
      $Upload = new Upload();
-     $bill   = new bill(); 
+     $bill   = new bili(); 
   	 $data   = $bill->getbiliData();
   	 if(empty($data)){
   		 echo '没有数据';
@@ -38,7 +38,7 @@ class qiliu{
                  $file_path = $dir.'/'.$file_name;                  
                  $call = "axel -n 2 -o  {$file_path}  {$video_img}";                   
                  exec($call,$array); //执行命令
-	               usleep(1000);
+	         usleep(1000);
                  if(file_exists($file_path)){
                    //上传七牛
                   $ret =  $Upload -> upload_file('bilibili-images',$file_path,$file_name);                     
@@ -49,7 +49,7 @@ class qiliu{
                         'image_path' => $file_path,
                         'image_name' => $file_name 
                       );  
-                   if(!empty($ret) && isset($ret['key'])){
+                   if($ret){
                       $db_data['is_qiniu'] = 1;
                       $db_data['add_qiniu_time'] = time();
                     } 

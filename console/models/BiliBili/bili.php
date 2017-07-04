@@ -2,7 +2,7 @@
 namespace models\BiliBili;
 use models\db\db;
 
-class bill{
+class bili{
 	 private   $conn = NULL;	
 	 private   $table = 'cra_bilibili_images';
 	 private   $M_table = 'bilibili';
