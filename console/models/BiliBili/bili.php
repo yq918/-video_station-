@@ -40,12 +40,28 @@ class bili{
     return $data;
    }  
 
-
+/**
+ * [addVideos description]
+ * @param [type] $data [description]
+ */
    public function addVideos($data)
    {
      $result  = $this->conn->insert($this->video_table, $data);
      return $this->conn->lastInsertId(); 
    }
+
+/**
+ * [getVideoss description]
+ * @param  string $filds [description]
+ * @param  string $where [description]
+ * @return [type]        [description]
+ */
+   public function getVideos($filds='',$where='')
+   {
+    $sql = sprintf("select %s from  %s where %s",$filds,$this->video_table,$where);
+    $data = $this->conn->fetchAll($sql);
+    return $data;
+   }  
 
 
 /**

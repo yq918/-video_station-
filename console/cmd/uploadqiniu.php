@@ -104,6 +104,10 @@ public function uploadVideo()
             $v_id =  $bill->addVideos($db_data);   
 
             if($v_id){
+              //重新查一次v_id
+               $where   =  sprintf("t_id = %d",$value['id']);
+               $videoData =$bill->getVideos('id',$where);
+               $v_id = isset($videoData[0]['id']) ? $videoData[0]['id'] : 0;
                 $up_data = array(
                    'v_id' => $v_id,
                    'img_id' => $img_id
