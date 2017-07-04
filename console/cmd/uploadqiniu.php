@@ -9,23 +9,25 @@ include '../config/conf.php';
 
 use models\db\db;
 use library\qiniu\Upload;
+use models\BiliBili\bill;
 
-class qiliu{
+class qiliu{ 
   public function run()
   { 
-  	$conn = db::getinstance();  	 
-  	$data = $conn->fetchAll("select id,video_img,video_path from bilibili ");
-  	if(empty($data)){
-  		echo '没有视频可下载';
-  		exit;
-  	}  
-
-    $Upload = new Upload();
-         foreach ($data as $key => $value) {
-  	       $video_img = $value['video_img'];
-  	       if(!empty($video_img)){
-                  //下载到本地
-                $dirname = date('YmdH');               
+     $Upload = new Upload();
+     $bill   = new bill(); 
+  	 $data   = $bill->getbiliData();
+  	 if(empty($data)){
+  		 echo '没有数据';
+  		 exit;
+  	 }  
+   foreach ($data as $key => $value) {
+  	  $video_img = $value['video_img'];
+      if(empty($video_img)){
+         continue;
+      }
+  	   //下载到本地
+        $dirname = date('YmdH');               
                 $dir = "/data/images/".$dirname;
                 if(!is_dir($dir) || !file_exists($dir)){
                     mkdir($dir,0777,true);
@@ -36,22 +38,26 @@ class qiliu{
                  $file_path = $dir.'/'.$file_name;                  
                  $call = "axel -n 2 -o  {$file_path}  {$video_img}";                   
                  exec($call,$array); //执行命令
-	         usleep(1000);
+	               usleep(1000);
                  if(file_exists($file_path)){
-                  //上传七牛
-                     $Upload -> upload_file('bilibili-images',$file_path,$file_name);
-                     var_dump($a);
+                   //上传七牛
+                  $ret =  $Upload -> upload_file('bilibili-images',$file_path,$file_name);                     
                  }
-               
-
-
-            }
-
+                    //写进数据库    
+                     $db_data = array(
+                        't_id'       => $value['id'],
+                        'image_path' => $file_path,
+                        'image_name' => $file_name 
+                      );  
+                   if(!empty($ret) && isset($ret['key'])){
+                      $db_data['is_qiniu'] = 1;
+                      $db_data['add_qiniu_time'] = time();
+                    } 
+                  $bill->addImages($db_data);   
+            } 
      }
-  }
-}
-
- 
+}  
 $class = new qiliu();
 $class->run();
+
 
