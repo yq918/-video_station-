@@ -6,6 +6,7 @@ class bili{
 	 private   $conn = NULL;	
 	 private   $table = 'cra_bilibili_images';
    private   $video_table = 'cra_bilibili_videos';
+   private   $title_table = 'cra_bilibili_title';
 	 private   $M_table = 'bilibili';
 
      public function __construct() 
@@ -39,6 +40,7 @@ class bili{
     $data = $this->conn->fetchAll($sql);
     return $data;
    }  
+
 
 /**
  * [addVideos description]
@@ -74,6 +76,31 @@ class bili{
   	   return $data;
      }
 
+   /**
+    * [getbiliDataByWhere description]
+    * @param  string $filds [description]
+    * @param  string $where [description]
+    * @return [type]        [description]
+    * 传入字段与条件 获取bilibili表数据
+    */
+   public function getbiliDataByWhere($filds='',$where='')
+   {
+    $sql = sprintf("select %s from  %s where %s",$filds,$this->M_table,$where);
+    $data = $this->conn->fetchAll($sql);
+    return $data;
+   }  
+
+    /**
+     * [addBiliBili description]
+     * @param [type] $data [description]
+     * 写入主表
+     */
+    public function addBiliBili($data)
+     {
+      $result  = $this->conn->insert($this->M_table, $data);
+      return $this->conn->lastInsertId(); 
+     }
+
 
 
    /**
@@ -104,6 +131,43 @@ class bili{
     }
 
 
+/**
+ * [addTitleData description]
+ * @param array $data [description]
+ * 写入标题表
+ */
+  public function addTitleData($data = array())
+  { 
+    $result  = $this->conn->insert($this->title_table, $data);
+    return $this->conn->lastInsertId(); 
+  }
 
+  /**
+   * [updateTitleData description]
+   * @param  [type] $data  [description]
+   * @param  [type] $where [description]
+   * @return [type]        [description]
+   * 更改标题表
+   */
+  public function updateTitleData($data,$where)
+  { 
+         $result =  $this->conn->update($this->title_table, $data, $where);
+         return $result;
+ }
  
+
+  /**
+   * [getTitleDataByWhere description]
+   * @param  string $filds [description]
+   * @param  string $where [description]
+   * @return [type]        [description]
+   * 查询标题表
+   */
+  public function getTitleDataByWhere($filds='',$where='')
+   {
+    $sql = sprintf("select %s from  %s where %s",$filds,$this->title_table,$where);
+    $data = $this->conn->fetchAll($sql);
+    return $data;
+   }  
+
  }
