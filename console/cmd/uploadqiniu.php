@@ -73,19 +73,12 @@ public function uploadVideo()
       if(empty($video_path)){
           continue;
       } 
-  /*    if(file_exists($video_path)){
+     if(file_exists($video_path)){
            //上传七牛
             $pathArr   =  explode('/',$video_path);
             $file_name =  array_pop($pathArr);
             $ret =  $Upload -> upload_file('bilibili-videos',$video_path,$file_name);                     
        }
-*/
-
-            $pathArr   =  explode('/',$video_path);
-            $file_name =  array_pop($pathArr);
-          
-          $ret = true;
-
 
           $where   =  sprintf("t_id = %d",$value['id']);
           $imgData = $bill->getImages('id',$where);
@@ -108,13 +101,14 @@ public function uploadVideo()
                $where   =  sprintf("t_id = %d",$value['id']);
                $videoData =$bill->getVideos('id',$where);
                $v_id = isset($videoData[0]['id']) ? $videoData[0]['id'] : 0;
-                $up_data = array(
+               $up_data = array(
                    'v_id' => $v_id,
                    'img_id' => $img_id
                   );
                 $where = array('id' => $value['id']);
                 $bill->updateBiliBili($up_data,$where);
                 $updata['v_id'] =    $v_id;
+                $where   =  array('t_id' => $value['id']);
                 $bill->updateBiliImage($updata,$where); 
             }
 
