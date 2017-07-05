@@ -72,7 +72,7 @@ class bili{
  */
      public function getbiliData()
      {
-  	   $data = $this->conn->fetchAll("select id,video_img,video_path from  ".$this->M_table);
+  	   $data = $this->conn->fetchAll("select * from  ".$this->M_table);
   	   return $data;
      }
 
