@@ -5,6 +5,7 @@
  * @date   2017-07-01 23:12
  */
 include '/home/zxr/video/video_station/console/init.php';
+include '/home/zxr/video/video_station/console/config/conf.php';
 use models\db\db;
 use models\YoutuBe\youtube;
 use library\qiniu\Upload;
@@ -84,9 +85,9 @@ class download{
              $file_Arr  = explode('/',$value['video_path']);
              $video_file_name = array_pop($file_Arr);
              $ret =  $this->upload->upload_file('youtube-videos',$value['video_path'],$video_file_name);
-
-              var_dump($ret);
-          }
+          }else{
+                 continue;
+               }
         //下载图片
          $dir = "/data/images/youtube/".date('YmdH');
          if(!is_dir($dir) || !file_exists($dir)){
@@ -94,12 +95,10 @@ class download{
          }
          $img_url  = $value['video_cover'];
          $urlInfo  = parse_url($img_url);
-         $img_file_name = str_replace('/','strive',$urlInfo['path']);
+         $img_file_name = str_replace('/','135',$urlInfo['path']);
          $path = $dir.'/'.$img_file_name;
          $ua = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0';
-         $call = "axel -n 2 -o ". escapeshellarg($path)."  -U {$ua}  ".escapeshellarg($img_url);
-
-         echo $call;
+         $call = "axel -n 2 -o ". escapeshellarg($path)."  -U '{$ua}'  ".escapeshellarg($img_url);
 
          exec($call,$array); //执行命令
          usleep(1000);
@@ -107,7 +106,6 @@ class download{
          if(file_exists($path)){
              //保存本地成功，上传到七牛
              $img_ret =  $this->upload->upload_file('youtube-images',$path,$img_file_name);
-             var_dump($img_ret);
          }
 
          if(empty($dowData)){
@@ -120,6 +118,7 @@ class download{
                  'image_file_name'  => $img_file_name,
                  'video_file_name' => $video_file_name,
                  'video_path' => $value['video_path'],
+                 'image_path' => $path,
                  'add_time' => time()
              );
              if($ret){
@@ -128,10 +127,6 @@ class download{
              if($img_ret){
                   $downData['img_upload'] = 1;
              }
-
-             echo '<pre>';
-             print_r($downData);
-             exit;
 
              $result = $youtubeObj->addDownloadData($downData);
          }
