@@ -6,7 +6,7 @@
  */
 include '/home/zxr/video/video_station/console/init.php';
 use models\db\db;
-use models\Youtube\youtube;
+use models\YoutuBe\youtube;
 use library\qiniu\Upload;
 
 class download{
@@ -66,7 +66,7 @@ class download{
    public  function upDownloadData()
    {
      $youtubeObj = new youtube();
-     $data =  $youtubeObj->getDownloadData();
+     $data =  $youtubeObj->getYoutubeData();
      if(empty($data)){
          echo '没有数据可处理';
          exit;
