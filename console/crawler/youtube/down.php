@@ -84,6 +84,8 @@ class download{
              $file_Arr  = explode('/',$value['video_path']);
              $video_file_name = array_pop($file_Arr);
              $ret =  $this->upload->upload_file('youtube-videos',$value['video_path'],$video_file_name);
+
+              var_dump($ret);
           }
         //下载图片
          $dir = "/data/images/youtube/".date('YmdH');
@@ -105,6 +107,7 @@ class download{
          if(file_exists($path)){
              //保存本地成功，上传到七牛
              $img_ret =  $this->upload->upload_file('youtube-images',$path,$img_file_name);
+             var_dump($img_ret);
          }
 
          if(empty($dowData)){
@@ -116,6 +119,7 @@ class download{
                  'video_time_content' => $value['video_time_content'],
                  'image_file_name'  => $img_file_name,
                  'video_file_name' => $video_file_name,
+                 'video_path' => $value['video_path'],
                  'add_time' => time()
              );
              if($ret){
