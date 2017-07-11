@@ -70,6 +70,7 @@ class saveData{
 		preg_match_all('/\d+/is',$str,$arr);
 		$data['playback_times']    = isset($arr[0][1]) ? $arr[0][1] : 0;
 		$data['add_time'] = time();
+		$data['cat_id'] = 2;
 		return $data;
     }
 
