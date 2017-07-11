@@ -10,4 +10,4 @@ $basepath = realpath(dirname(__FILE__).'/../') . '/';
 
 
 define('SITEBASE',$basepath);  //站点系统根目录
-define('SERVICE_LOGFILE','/home/zxr/video/prolog/rpc.log');	 //swoole 日志路径
+define('SERVICE_LOGFILE','./prolog/rpc.log');	 //swoole 日志路径
