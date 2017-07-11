@@ -89,7 +89,7 @@ class saveData{
 		$data['video_url'] = isset($req['href']) ? $req['href'] : '';
 		$data['video_title'] = isset($req['title']) ? $req['title'] : '';
 		$data['play_duration'] = trim($play_time);
-		$data['video_time_content'] = isset($req['playback_times']) ? $req['playback_times'] : '';
+		$data['video_time_content'] = isset($req['playback_times']) ? trim(strip_tags($req['playback_times'] )): '';
 		$data['video_cover'] = isset($req['imgaddress']) ? $req['imgaddress'] : '';
 		$data['cat_id'] = '3';
 	    return  $data;
