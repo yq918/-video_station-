@@ -21,8 +21,8 @@ class Server {
 		'package_length_type' => 'N',
 		'package_body_offset' => 16,
 		'package_length_offset' => 0,
-		'user' => 'mosh',
-		'group' => 'mosh',
+		'user' => 'www',
+		'group' => 'www',
 		'heartbeat_check_interval' => 30,
 		'heartbeat_idle_time' => 60,
 		'log_file' => SERVICE_LOGFILE, //日志路径
@@ -142,7 +142,7 @@ class Server {
 		if(empty($request['class']) || empty($request['method']) || !isset($request['param_array'])) 
 		{
 			//发送数据给客户端，请求包错误
-			return $serv->send($fd,self::encode(array('code'=>'400', 'msg'=>'Bad Request,Data Error.', 'data'=>null), $header['type'], $header['uid'], $header['serid']));
+			return $serv->send($fd,self::encode(array('code'=>'400', 'msg'=>'Bad Request,Data Error.', 'data'=>null,'request'=>$request,'body' => $body), $header['type'], $header['uid'], $header['serid']));
 		}
 
 		//获得要调用的类、方法、及参数
