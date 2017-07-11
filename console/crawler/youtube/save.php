@@ -10,6 +10,7 @@ use models\YoutuBe\youtube;
 class saveData{
 	const POPULAR = '2'; //时下流行
 	const MUSIC   = '3'; //音乐
+	const SPORTS  = '4'; //体育
 	public $req = array();
     public function run()
     {
@@ -22,8 +23,9 @@ class saveData{
 			case  self::POPULAR:
 				$data =  $this->popularNowadays();
 				break;
-			case self::MUSIC:
-				$data = $this->musicData();
+			case self::MUSIC  :
+			case self::SPORTS :
+				$data = $this->musicData($cat_id);
 				break;
 		}
 		$youtubeObj = new youtube();
@@ -77,7 +79,7 @@ class saveData{
 	 * [音乐]
 	 * @author zhangxuanru  [zhangxuanru@eventmosh.com]
 	 */
-	public function musicData()
+	public function musicData($cat_id)
 	{
 		$req = $this->req;
         $play_time = isset($req['play_time']) ? trim($req['play_time']) : 0;
@@ -91,7 +93,7 @@ class saveData{
 		$data['play_duration'] = trim($play_time);
 		$data['video_time_content'] = isset($req['playback_times']) ? trim(strip_tags($req['playback_times'] )): '';
 		$data['video_cover'] = isset($req['imgaddress']) ? $req['imgaddress'] : '';
-		$data['cat_id'] = '3';
+		$data['cat_id'] = $cat_id;
 	    return  $data;
 	}
 }
