@@ -35,9 +35,12 @@ class youtube{
      * @param string $where
      * @return array
      */
-    public function getYoutubeData($filds='',$where='')
+    public function getYoutubeData($filds='*',$where='')
     {
         $sql = sprintf("select %s from  %s where %s",$filds,$this->table,$where);
+       if(empty($where)){
+           $sql = sprintf("select %s from  %s ",$filds,$this->table);
+           }        
         $data = $this->conn->fetchAll($sql);
         return $data;
     }
