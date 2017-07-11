@@ -15,7 +15,7 @@ class Api{
     public function __construct($rpc_model = null)
     {
         if ($rpc_model) $this->prc_model = $rpc_model;
-        $this->rpc_client = RpcClient::instance($rpc_model);
+        $this->rpc_client = RpcClient::instance($this->prc_model);
     }
 
     /**
