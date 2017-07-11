@@ -26,7 +26,7 @@ class IndexController extends InitController {
 	public function  aaAction()
 	{
           $Api = new Api();
-		  $Api->getYoutubeVideo();
+		  $Api->getYoutubeVideo(null,null,null,null);
 	}
 	/** 
      * 默认动作

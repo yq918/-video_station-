@@ -81,7 +81,7 @@ class RpcClient
 	public static function config($address_array)
 	{
 		if (empty($address_array)) {
-			self::$addressArray = include SITEBASE.'Rpc.conf.php';
+			self::$addressArray = include SITEBASE.'/conf/Rpc.conf.php';
 
 		}else{
 			self::$addressArray = $address_array;
