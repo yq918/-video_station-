@@ -61,7 +61,7 @@ class saveData{
 		$req = $this->req;
 		$data = [];
 		$filed = array('video_url','video_title','play_duration','video_time_content','playback_times','video_cover');
-		array_map(function($key) use (&$data){
+		array_map(function($key) use (&$data,$req){
 			if(isset($req[$key]) && !empty($req[$key])){
 				$data[$key] = trim($req[$key]);
 			}
