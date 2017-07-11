@@ -9,7 +9,9 @@
 //use library\Aa\Cb;
 use Aa\Bb;           //libary
 use Base\Tools;     //libary
-use models\Aa\SampleModel; //models  
+use models\Aa\SampleModel; //models
+
+use controllers\www\Api;
 
 
 
@@ -21,12 +23,26 @@ class IndexController extends InitController {
 		      parent::init();
 	}
 
+	public function  aaAction()
+	{
+          $Api = new Api();
+		  $Api->getYoutubeVideo();
+	}
 	/** 
      * 默认动作
      * Yaf支持直接把Yaf_Request_Abstract::getParam()得到的同名参数作为Action的形参
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
-	public function indexAction($name = "Stranger") {
+	public function indexAction($name = "Stranger")
+	{
+		/*
+		 * 展示顺序为：
+		 *   1.当下流行
+		 *   2.搞笑
+		 *   3.音乐
+		 *   4.体育
+		 *
+		 * */
  
  
 		//1. fetch query

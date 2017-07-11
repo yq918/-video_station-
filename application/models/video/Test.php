@@ -1,5 +1,5 @@
 <?php
-namespace Module;
+namespace video;
 
 class Test
 {
@@ -10,7 +10,7 @@ class Test
         return "hello-soa-finish: $str";
     }
 
-    static function hello()
+    static function aa()
     {
         return array('key1' => 'A', 'key2' => 'B');
     }
