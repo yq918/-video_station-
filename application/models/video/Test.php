@@ -14,7 +14,6 @@ class Test
     static function aa()
     {
         $db =  Mysql::instance();
-        var_dump($db);
-        return array('key1' => 'A', 'key2' => 'B');
+        return array('key1' => 'A', 'key2' => 'B','db'=>$db);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace Db;
+use Base\Base;
 /**
  * Class Db_Mysql
  *
@@ -67,7 +68,6 @@ class Mysql{
     function __construct($pConfig = 'default'){
         $this->_config = $pConfig;
         $this->tablename || $this->tablename = strtolower(substr(get_class($this), 0, -5));
-        $config = new Yaf\Config\Ini('../config/config.ini', 'default');
     }
 
     /**
@@ -100,7 +100,8 @@ class Mysql{
      */
     static function instance($pConfig = 'default'){
         if(empty(self::$instance[$pConfig])){
-            $tDB = Yaf\Registry::get("config")->db->$pConfig->toArray();
+            $tDB = Base::parseIni('./config/config.ini');
+            return $tDB;
             print_r($tDB);
             self::$instance[$pConfig] = @new PDO($tDB['dsn'], $tDB['username'], $tDB['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         }

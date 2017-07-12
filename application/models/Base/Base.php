@@ -1,0 +1,20 @@
+<?php
+namespace Base;
+class Base
+{
+    /**
+     * parseIni
+     *
+     * [½âÎöINIÎÄ¼þ]
+     * @author zhangxuanru  [zhangxuanru@eventmosh.com]
+     * @param $file
+     */
+    public static  function parseIni($file)
+    {
+         $fileArr = parse_ini_file($file);
+         return    $fileArr;
+    }
+
+
+
+}
