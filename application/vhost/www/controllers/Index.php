@@ -11,7 +11,7 @@ use Aa\Bb;           //libary
 use Base\Tools;     //libary
 use models\Aa\SampleModel; //models
 
-use controllers\www\Api;
+use controllers\Video\Youtube;
 
 
 
@@ -25,8 +25,8 @@ class IndexController extends InitController {
 
 	public function  aaAction()
 	{
-          $Api = new Api();
-		  $Api->getYoutubeVideo(null,null,null,null);
+          $Video = new Youtube();
+		  $Video->getYoutubeVideo(null,null,null,null);
 	}
 	/** 
      * 默认动作

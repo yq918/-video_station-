@@ -4,10 +4,10 @@
  * @desc 调取数据库数据，执行数据库方法,设置缓存可在API层加
  * @author zxr
  */
-namespace controllers\www;
+namespace controllers\Video;
 use controllers\Client\RpcClient;
 
-class Api{
+class Youtube{
     protected $prc_model = 'video\Youtube';
 
     protected $rpc_client = null;
@@ -33,14 +33,5 @@ class Api{
     {
         $data = $this->rpc_client->getYoutubeVideoList(2,0,6,'sort DESC ');
         print_r($data);
-    }
-
-
-    public function selectSample() {
-        return 'AAAAAAAAAAA   AAAAAAAAAA  Model  Aa ';
-    }
-
-    public function insertSample($arrInfo) {
-        return true;
     }
 }
