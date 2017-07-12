@@ -8,7 +8,7 @@ namespace controllers\www;
 use controllers\Client\RpcClient;
 
 class Api{
-    protected $prc_model = 'video\Test';
+    protected $prc_model = 'video\Youtube';
 
     protected $rpc_client = null;
 
@@ -31,7 +31,7 @@ class Api{
      */
     public function getYoutubeVideo($fields,$where,$order,$limit,$cache=true)
     {
-        $data = $this->rpc_client->aa();
+        $data = $this->rpc_client->getYoutubeVideoList(2,0,6,'sort DESC ');
         print_r($data);
     }
 
