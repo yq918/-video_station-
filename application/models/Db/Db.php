@@ -9,10 +9,11 @@ class Db
         $db = NULL;
         switch($driver){
             case 'mysql':
+                $mysql = new Mysql();
                 $db =  Mysql::instance();
                 break;
         }
-        return $db;
+        return $mysql;
     }
 }
 

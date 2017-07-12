@@ -102,8 +102,6 @@ class Mysql{
         if(empty(self::$instance[$pConfig])){
             $tDB = Base::parseIni('../config/config.ini');
             $master = $tDB['master'];
-           //return $master;
-
             self::$instance[$pConfig] = new \PDO($master['dsn'], $master['username'], $master['password'], array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         }
         return self::$instance[$pConfig];
