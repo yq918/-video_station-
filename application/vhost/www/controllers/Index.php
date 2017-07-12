@@ -11,10 +11,11 @@ use Aa\Bb;           //libary
 use Base\Tools;     //libary
 use models\Aa\SampleModel; //models
 
-use vhost\www\controllers\Traits\DataTraits;
-
+use vhost\www\controllers\Traits\DataTraits; 
  
 class IndexController extends InitController {
+
+	use DataTraits;
 
 	public function init(){
 		      parent::init();
