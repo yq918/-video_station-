@@ -185,7 +185,7 @@ class Mysql{
             isset($this->error[1]) || $this->error = array();
             return array();
         }
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
