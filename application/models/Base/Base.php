@@ -11,7 +11,10 @@ class Base
      */
     public static  function parseIni($file)
     {
-         $fileArr = parse_ini_file($file);
+      if(!file_exists($file)){
+               return [];
+        }        
+         $fileArr = parse_ini_file($file,true);
          return    $fileArr;
     }
 

@@ -12,13 +12,13 @@ class Base
     public static function getConstant($case)
     {
         //windows 临时配
-        return array(
+/*        return array(
               'static_url' => 'http://static.video.cc'
             );
 
-		 
-        //$constant = \YaConf::get($case);
-        //return $constant;
+*/		 
+        $constant = \YaConf::get($case);
+        return $constant;
     }
 
 

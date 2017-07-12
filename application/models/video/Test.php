@@ -14,6 +14,6 @@ class Test
     static function aa()
     {
         $db =  Mysql::instance();
-        return array('key1' => 'A', 'key2' => 'B','db'=>$db);
+        return array('key1' => 'A', 'key2' => 'B');
     }
 }
