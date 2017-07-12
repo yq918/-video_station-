@@ -1,6 +1,7 @@
 <?php 
 namespace vhost\www\controllers\Traits;
 use controllers\Video\Youtube;
+use controllers\Video\Bili;
 
 trait DataTraits{
 	/**
@@ -20,8 +21,11 @@ trait DataTraits{
    */
   public function funny()
   {
-
+       $Video = new Bili();
+       $data =  $Video->getBiliVideoList(1);
+       return $data;
   } 
+
 
 }
  ?>
