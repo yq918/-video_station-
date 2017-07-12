@@ -11,12 +11,9 @@ use Aa\Bb;           //libary
 use Base\Tools;     //libary
 use models\Aa\SampleModel; //models
 
-use controllers\Video\Youtube;
+use vhost\www\controllers\Traits\DataTraits;
 
-
-
-
-
+ 
 class IndexController extends InitController {
 
 	public function init(){
@@ -25,8 +22,10 @@ class IndexController extends InitController {
 
 	public function  aaAction()
 	{
-          $Video = new Youtube();
-		  $Video->getYoutubeVideo(null,null,null,null);
+          $data =  $Video->popularNowadays();
+
+          print_r($data);
+          exit; 
 	}
 	/** 
      * 默认动作
@@ -35,6 +34,10 @@ class IndexController extends InitController {
      */
 	public function indexAction($name = "Stranger")
 	{
+
+        //当下流行
+       // $data =  $Video->popularNowadays();
+
 		/*
 		 * 展示顺序为：
 		 *   1.当下流行

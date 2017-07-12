@@ -29,9 +29,11 @@ class Youtube{
      * @param $limit
      * @param bool|true $cache
      */
-    public function getYoutubeVideo($fields,$where,$order,$limit,$cache=true)
+    public function getYoutubeVideoList($cat_id,$start = 0,$limit = 6,$order = 'sort DESC')
     {
-        $data = $this->rpc_client->getYoutubeVideoList(2,0,6,'sort DESC ');
+        $data = $this->rpc_client->getYoutubeVideoList($cat_id,$start,$limit,$order);
+        return $data;
+
         print_r($data);
     }
 }
