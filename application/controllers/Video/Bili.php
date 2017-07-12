@@ -1,14 +1,14 @@
 <?php
 /**
  * @name Api
- * @desc µ÷È¡Êı¾İ¿âÊı¾İ£¬Ö´ĞĞÊı¾İ¿â·½·¨,ÉèÖÃ»º´æ¿ÉÔÚAPI²ã¼Ó
+ * @desc è°ƒå–æ•°æ®åº“æ•°æ®ï¼Œæ‰§è¡Œæ•°æ®åº“æ–¹æ³•,è®¾ç½®ç¼“å­˜å¯åœ¨APIå±‚åŠ 
  * @author zxr
  */
 namespace controllers\Video;
 use controllers\Client\RpcClient;
 
-class Youtube{
-    protected $prc_model = 'video\Youtube';
+class Bili{
+    protected $prc_model = 'video\Bili';
 
     protected $rpc_client = null;
 
@@ -21,7 +21,7 @@ class Youtube{
     /**
      * getYoutubeVideo
      *
-     * [»ñÈ¡youtubeÊÓÆµ]
+     * [è·å–youtubeè§†é¢‘]
      * @author zhangxuanru  [zhangxuanru@eventmosh.com]
      * @param $fields
      * @param $where
@@ -29,9 +29,9 @@ class Youtube{
      * @param $limit
      * @param bool|true $cache
      */
-    public function getYoutubeVideoList($cat_id,$start = 0,$limit = 6,$order = 'sort DESC')
+    public function getBiliVideoList($cat_id,$start = 0,$limit = 6,$order = 'sort DESC')
     {
-        $data = $this->rpc_client->getYoutubeVideoList($cat_id,$start,$limit,$order);
+        $data = $this->rpc_client->getBiliVideoList($cat_id,$start,$limit,$order);
         return $data; 
     }
 }

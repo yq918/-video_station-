@@ -23,7 +23,7 @@ class IndexController extends InitController {
 
 	public function  aaAction()
 	{
-          $data =  $Video->popularNowadays();
+          $data =  $this->popularNowadays();
 
           print_r($data);
           exit; 

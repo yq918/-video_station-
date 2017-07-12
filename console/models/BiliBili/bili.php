@@ -8,6 +8,7 @@ class bili{
    private   $video_table = 'cra_bilibili_videos';
    private   $title_table = 'cra_bilibili_title';
 	 private   $M_table = 'bilibili';
+   private   $Down_table = 'cra_bilibili_download';
 
      public function __construct() 
      {
@@ -41,6 +42,14 @@ class bili{
     return $data;
    }  
 
+  /**
+   * [addDownData description]
+   */
+  public function addDownData($data)
+  {
+     $result  = $this->conn->insert($this->Down_table, $data); 
+     return $this->conn->lastInsertId(); 
+ }
 
 /**
  * [addVideos description]
