@@ -21,6 +21,7 @@ class RpcClient
 	const HEADER_PACK           = "NNNN";
 	const DECODE_PHP            = 1;   //使用PHP的serialize打包
 	const DECODE_JSON           = 2;   //使用json_encode打包
+	const RPC_COOD              = 1000;
 
 	protected $packet_maxlen = 2097152;   //最大不超过2M的数据包
 
