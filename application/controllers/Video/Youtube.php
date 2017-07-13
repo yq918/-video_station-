@@ -32,6 +32,10 @@ class Youtube{
     public function getYoutubeVideoList($cat_id,$start = 0,$limit = 6,$order = 'sort DESC')
     {
         $data = $this->rpc_client->getYoutubeVideoList($cat_id,$start,$limit,$order);
-        return $data; 
+        if($data['code'] == RPC_COOD ){
+            return $data['data']; 
+        }
+        return [];
+        
     }
 }

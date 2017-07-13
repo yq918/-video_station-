@@ -27,7 +27,7 @@ class Youtube
         $fields = array('where'=>"video_down=1 and video_img_down=1 AND status=1 AND cat_id={$cat_id} ", 'limit'=>"{$start},{$limit}", 'order'=>$order, 'field'=>'id','table'=> self::YOUTUBETABLE);
         $data =  $this->db->fList($fields);
         if(empty($data)){
-              return array('data' => $data);
+              return array(''=>'','data' => $data);
         }
         $you_id_list = array_column($data,'id');
         $you_id_str  = implode(',',$you_id_list);
@@ -37,7 +37,7 @@ class Youtube
                         'field' => 'id,video_title,play_duration,image_file_name,video_file_name,video_time_content',
                         'table' => self::YOUTUBEDOWNTABLE);
         $you_data = $this->db->fList($fields);
-        return array('data' => $data, 'you_data' => $you_data);
+        return array('data' => $you_data);
     }
 
 }
