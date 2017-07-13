@@ -30,20 +30,7 @@ class InitController extends Yaf\Controller_Abstract {
         $this->assignStatic();
         $this->assignDefaultData();
     }
-
-    /**
-     * getConstant
-     *
-     * [获取系统常量]
-     * @author zhangxuanru  [zhangxuanru@eventmosh.com]
-     */
-//    public function getConstant()
-//    {
-//        Base::getConstant();
-//        $constant = Yaf\Registry::get('constant');
-//        $this->constant = $constant;
-//    }
-
+ 
 
     /**
      * assignDefaultData
@@ -53,7 +40,8 @@ class InitController extends Yaf\Controller_Abstract {
      */
    public function assignDefaultData()
   {
-        $constant   =   Base::getConstant('constant.constant');
+        $constant   = Base::getConstant('constant.constant');
+        $this->constant = $constant;
         $static_url = isset($constant['static_url']) ? $constant['static_url'] : '';
         $static_str = isset($constant['static_version']) ? "?v=".$constant['static_version'] : '';
         $this->getView()->assign("static_url",$static_url);

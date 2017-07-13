@@ -11,14 +11,22 @@ use Aa\Bb;           //libary
 use Base\Tools;     //libary
 use models\Aa\SampleModel; //models
 
+use controllers\Video\Youtube;
+use controllers\Video\Bili;
 use vhost\www\controllers\Traits\DataTraits; 
  
 class IndexController extends InitController {
 
 	use DataTraits;
 
+	public  $constant = null ;
+	public  $_Youtube = null;
+	public  $_Bili    = null;
+
 	public function init(){
 		      parent::init();
+		      $this->_Youtube = new Youtube();
+		      $this->_Bili    = new Bili();
 	}
 
 	public function  aaAction()
@@ -38,8 +46,12 @@ class IndexController extends InitController {
      * Yaf支持直接把Yaf_Request_Abstract::getParam()得到的同名参数作为Action的形参
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
-	public function indexAction($name = "Stranger")
+	public function indexAction()
 	{
+		$data['popular'] = $this->popularNowadays();
+		$data['funny']   = $this->funny();
+		$data['music']   = $this->music(); 
+		$this->getView()->assign("data", $data);
 
         //当下流行
        // $data =  $Video->popularNowadays();
@@ -55,24 +67,24 @@ class IndexController extends InitController {
  
  
 		//1. fetch query
-		$get = $this->getRequest()->getQuery("get", "default value");
+		//$get = $this->getRequest()->getQuery("get", "default value");
 
-		$model = new Bb();
+		//$model = new Bb();
 		//echo "library/Aa:".$model->selectSample();
 
 
-       $m = new SampleModel();
+      // $m = new SampleModel();
 		//echo "<br/>models/Aa:".$m->selectSample();
 
 		//2. fetch model
-		 $model = new SampleModel();  //这里加载的是MODELS目录中的文件
+		// $model = new SampleModel();  //这里加载的是MODELS目录中的文件
 	   //  echo "<br/>models:".$model->selectSample();
 
 	 
 
 		//3. assign
-		$this->getView()->assign("content", $model->selectSample());
-		$this->getView()->assign("name", $name);
+		//$this->getView()->assign("content", $model->selectSample());
+		//$this->getView()->assign("name", $name);
 
 		//$this->getView()->_tpl_dir=VIEWPATH;
 
