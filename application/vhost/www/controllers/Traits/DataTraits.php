@@ -11,11 +11,11 @@ trait DataTraits{
     { 
     	  $data =  $this->_Youtube->getYoutubeVideoList(2);
     	  if(empty($data)){
-    	      return [];
+    	       return [];
     	  }
     	  $constant = $this->constant;
     	  foreach($data as $key => &$val){
-                $val['img_url'] = $constant['youimages'].'/'.$val['image_file_name'];
+                $val['img_url'] = $constant['static_you_images'].'/'.$val['image_file_name'];
     	  }
     	  return $data;
     }

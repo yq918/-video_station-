@@ -33,12 +33,12 @@ class IndexController extends InitController {
 	{
           $data =  $this->popularNowadays();
 
+           echo '<pre>';
           print_r($data);
 
-          $data = $this->funny();
-
-           echo '###';
-           print_r($data);
+         // $data = $this->funny();
+ 
+          // print_r($data);
           exit; 
 	}
 	/** 
