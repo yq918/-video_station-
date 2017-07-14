@@ -1,6 +1,7 @@
 <?php 
 namespace vhost\www\controllers\Traits;
-
+use Base\Tools;
+use Base\Base;
 
 trait DataTraits{
 	/**
@@ -9,13 +10,16 @@ trait DataTraits{
 	 */
     public function popularNowadays()
     { 
-    	  $data =  $this->_Youtube->getYoutubeVideoList(2);
+    	  $data =  $this->_Youtube->getYoutubeVideoList(2,0,3);
     	  if(empty($data)){
     	       return [];
     	  }
-    	  $constant = $this->constant;
+    	  $constant = Base::getConstant();
     	  foreach($data as $key => &$val){
-                $val['img_url'] = $constant['static_you_images'].'/'.$val['image_file_name'];
+                $val['img_url'] = $constant['static_you_images'].'/'.$val['image_file_name'].'?v='.$constant['static_version'];
+                $val['author'] = 'Small stone';
+                $link = Tools::parameterEncryption($val['id']);
+                $val['link'] = '/single/?sing='.$link;
     	  }
     	  return $data;
     }

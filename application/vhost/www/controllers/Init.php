@@ -26,8 +26,7 @@ class InitController extends Yaf\Controller_Abstract {
         // 关闭自动渲染模板
         //Yaf\Dispatcher::getInstance()->disableView();
         Yaf\Dispatcher::getInstance()->disableView();
-        $this->_req = $this->getRequest();
-        $this->assignStatic();
+        $this->_req = $this->getRequest(); 
         $this->assignDefaultData();
     }
  
@@ -50,14 +49,16 @@ class InitController extends Yaf\Controller_Abstract {
 
 
     /**
-     * assignStatic
+     * options
      *
      * [获取样式与JS]
      * @author zhangxuanru  [zhangxuanru@eventmosh.com]
      */
-    public function assignStatic()
+    public function assignOptions($node_case = '')
     {
-    	$node_case = strtolower( $this->_req->getControllerName().'_'.$this->_req->getActionName() );
+      if(empty($node_case)){
+          $node_case = strtolower( $this->_req->getControllerName().'_'.$this->_req->getActionName() );
+      } 
         $options   = $this->options($node_case);
         $this->getView()->assign('options', $options);
     }

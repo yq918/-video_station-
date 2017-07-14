@@ -72,4 +72,33 @@ class Tools
     }
 
 
+    /**
+     * [ParameterEncryption description]
+     * @param [type] $str [description]
+     */
+    public function parameterEncryption($str)
+    {
+         $str = "13520v".$str."13520v";
+         $str = base64_encode( $str);
+         return $str; 
+    }
+
+    public function parameterDecryption($str)
+    {
+        $str = base64_decode($str);
+        $str = substr($str,6);
+        $str = substr($str,0,-6); 
+        return $str; 
+    }
+
+
+  
+
+
+
+    
+
+
+
+
 }

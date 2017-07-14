@@ -15,6 +15,7 @@ use controllers\Video\Youtube;
 use controllers\Video\Bili;
 use vhost\www\controllers\Traits\DataTraits; 
  
+ 
 class IndexController extends InitController {
 
 	use DataTraits;
@@ -52,6 +53,9 @@ class IndexController extends InitController {
 		$data['funny']   = $this->funny();
 		$data['music']   = $this->music(); 
 		$this->getView()->assign("data", $data);
+		$this->assignOptions('index_index');
+
+
 
         //当下流行
        // $data =  $Video->popularNowadays();
@@ -95,6 +99,13 @@ class IndexController extends InitController {
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
         //return true;
 	}
+
+
+	public function singleAction()
+	{
+        echo 'aaaa';
+	}
+
 
 
 	public function testAction()
