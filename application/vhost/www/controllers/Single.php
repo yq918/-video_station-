@@ -44,7 +44,7 @@ class SingleController extends InitController {
 		  }
        $id  = Tools::parameterDecryption($sing); 
  
-        $this->assignOptions('index_index');
+        $this->assignOptions('single_index');
 	    $this->getView()->display(VIEWPATH.'/www/index/single.phtml');
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板

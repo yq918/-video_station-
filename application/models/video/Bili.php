@@ -7,6 +7,7 @@ class Bili
     private  $db;
     const BILITABLE = 'bilibili';
     const BILIDOWNTABLE = 'cra_bilibili_download';
+    const RPC_COOD = '1000';
     public function __construct()
     {
         $this->db =  Db::instance();
@@ -32,7 +33,7 @@ class Bili
 
         $data =  $this->db->fList($fields);
         if(empty($data)){
-              return array('data' => $data);
+              return array('code'=>self::RPC_COOD,'data' => $data);
         }
 
         $b_id_list = array_column($data,'id');
@@ -43,7 +44,7 @@ class Bili
                         'field' => 'id,video_title,image_file_name,video_file_name',
                         'table' => self::BILIDOWNTABLE);
         $b_data = $this->db->fList($fields);
-        return array('b_data' => $b_data);
+        return array('code'=>self::RPC_COOD,'data' => $b_data);
     }
 
 }

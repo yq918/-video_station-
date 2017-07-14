@@ -6,7 +6,12 @@ trait StaticConf{
           $option =  array(
                'comm' => array(
                    'style' => array(
-                      // '/css/common/bootstrap.css',
+                         '/css/bootstrap.min.css',
+                         '/css/dashboard.css',
+                         '/css/style.css',
+                         '/fonts/open_sans.css',
+                         '/fonts/poiret_one.css',
+                         '/css/popuo-box.css'
                    ),
                    'script' => array(
                        //'/js/common/jquery-1.11.1.min.js'
@@ -15,12 +20,12 @@ trait StaticConf{
 
                 'index_index' => array(
                      'style' => array(
-                         '/css/bootstrap.min.css',
-                         '/css/dashboard.css',
-                         '/css/style.css',
-                         '/fonts/open_sans.css',
-                         '/fonts/poiret_one.css',
-                         '/css/popuo-box.css'
+                         // '/css/bootstrap.min.css',
+                         // '/css/dashboard.css',
+                         // '/css/style.css',
+                         // '/fonts/open_sans.css',
+                         // '/fonts/poiret_one.css',
+                         // '/css/popuo-box.css'
                      ),
                     'script' => array(
                             '/js/jquery-1.11.1.min.js',
@@ -34,6 +39,20 @@ trait StaticConf{
                     'keywords' => '',
                     'description' => '',
                 ),
+               
+               'single_index' => array(
+                        'style' => array(),
+                        'script' => array(
+                            '/js/jquery-1.11.1.min.js',
+                            '/js/modernizr.custom.min.js',
+                            '/js/jquery.magnific-popup.js',
+                            '/js/responsiveslides.min.js',  
+                            '/js/bootstrap.min.js',
+                          )
+                ),
+
+
+
             );
 
         if(isset($option[$node_case])){

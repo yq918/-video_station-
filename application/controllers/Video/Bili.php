@@ -31,7 +31,10 @@ class Bili{
      */
     public function getBiliVideoList($cat_id,$start = 0,$limit = 6,$order = 'sort DESC')
     {
-        $data = $this->rpc_client->getBiliVideoList($cat_id,$start,$limit,$order);
-        return $data; 
+        $data = $this->rpc_client->getBiliVideoList($cat_id,$start,$limit,$order);  
+        if($data['code'] == RpcClient::RPC_COOD ){
+            return $data['data']; 
+        }
+        return []; 
     }
 }

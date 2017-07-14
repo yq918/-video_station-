@@ -7,7 +7,7 @@ trait DataTraits{
 	/**
 	 * [popularNowadays description]
 	 * @return [type] [description]
-	 */
+	 */ 
     public function popularNowadays()
     { 
     	  $data =  $this->_Youtube->getYoutubeVideoList(2,0,3);
@@ -30,9 +30,17 @@ trait DataTraits{
    */
   public function funny()
   {      
-       $data =  $this->_Bili->getBiliVideoList(1);
+       $data =  $this->_Bili->getBiliVideoList(1,0,4);
+       $constant =  Base::getConstant();
+       foreach ($data as $key => &$value) {
+           $value['img_url'] = $constant['static_bili_images'].'/'.$value['image_file_name'].'?v='.$constant['static_version'];
+           $value['author'] = 'Small stone';
+           $link = Tools::parameterEncryption($value['id']);
+           $value['link'] = '/single/?sing='.$link;
+       }
        return $data;
   }
+
 
   public function music()
   { 

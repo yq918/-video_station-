@@ -32,14 +32,15 @@ class IndexController extends InitController {
 
 	public function  aaAction()
 	{
-          $data =  $this->popularNowadays();
+          //$data =  $this->popularNowadays();
 
-           echo '<pre>';
-          print_r($data);
-
-         // $data = $this->funny();
  
-          // print_r($data);
+            echo '<pre>';
+         // print_r($data);
+
+            $data = $this->funny();
+ 
+           print_r($data);
           exit; 
 	}
 	/** 
