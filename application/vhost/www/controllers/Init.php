@@ -2,6 +2,7 @@
 use  vhost\www\controllers\Traits\StaticConf;
 
 use Base\Base;
+use Base\Tools;
 
 /**
  * @name InitController
@@ -28,6 +29,7 @@ class InitController extends Yaf\Controller_Abstract {
         Yaf\Dispatcher::getInstance()->disableView();
         $this->_req = $this->getRequest(); 
         $this->assignDefaultData();
+        $this->generativeNavigation();
     }
  
 
@@ -62,6 +64,64 @@ class InitController extends Yaf\Controller_Abstract {
         $options   = $this->options($node_case);
         $this->getView()->assign('options', $options);
     }
+
+    
+    /**
+     * [generativeNavigation description]
+     * @return [type] [description]
+     * Éú³Éµ¼º½
+     */
+    public function generativeNavigation($display = true)
+    {
+        $arr = array(
+            array(
+                 'id'    => 0,
+                 'title' => 'Home',
+                 'class' => 'home-icon',
+                 'spanClass' => 'glyphicon glyphicon-home' 
+                ),
+            array(
+                 'id'   => Base::getCatTypeData('popular'),
+                 'title' => 'Popular nowadays',
+                 'class' => 'user-icon',
+                 'spanClass' => 'glyphicon glyphicon-home glyphicon-hourglass' 
+                ),
+            array(
+                 'id'    => Base::getCatTypeData('funny'),
+                 'title' => 'Funny',
+                 'class' => 'menu1',
+                 'spanClass' => 'glyphicon glyphicon-film' 
+                ),
+            array(
+                 'id'    => Base::getCatTypeData('music'),
+                 'title' => 'Music',
+                 'class' => 'song-icon',
+                 'spanClass' => 'glyphicon glyphicon-music' 
+                ),
+            array(
+                 'id'   =>  Base::getCatTypeData('sports'),
+                 'title' => 'Sports',
+                 'class' => 'menu',
+                 'spanClass' => 'glyphicon glyphicon-film glyphicon-king' 
+                ),
+            array(
+                 'id'    => 100,
+                 'title' => 'News',
+                 'class' => 'news-icon',
+                 'spanClass' => 'glyphicon glyphicon-envelope' 
+                ), 
+            );
+
+        foreach ($arr as $key => $value) {
+            $value['link'] =  Tools::generateLinks('/shows/',$value['id']);
+            $arr[$key] = $value;
+        }  
+       if($display){
+            $this->getView()->assign('menu', $arr); 
+       }
+        return $arr; 
+    }
+
 
 
 }

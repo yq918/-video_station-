@@ -38,4 +38,21 @@ class Youtube{
         return [];
         
     }
+
+    /**
+     * [showsDetailsVideo description]
+     * @param  [type] $cat_id [description]
+     * @param  [type] $start  [description]
+     * @param  [type] $limit  [description]
+     * @param  [type] $order  [description]
+     * @return [type]         [description]
+     * 详情页获取视频数据
+     */
+    public function showsDetailsVideo($cat_id,$start,$limit,$order = 'sort DESC')
+    {
+        $data = $this->rpc_client->showsDetailsVideo($cat_id,$start,$limit,$order);
+        return $data; 
+    }
+
+
 }

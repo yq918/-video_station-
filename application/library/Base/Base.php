@@ -10,15 +10,28 @@ class Base
      * @author zhangxuanru  [zhangxuanru@eventmosh.com]
      */
     public static function getConstant($case = 'constant.constant')
-    {
-        //windows 临时配
-/*        return array(
-              'static_url' => 'http://static.video.cc'
-            );
-
-*/		 
+    {   
         $constant = \YaConf::get($case);
         return $constant;
+    }
+
+    /**
+     * [catTypeData description]
+     * @return [type] [description]
+     * 分类信息
+     */
+    public static function getCatTypeData($cat_name = '')
+    {
+        $data = array(
+              'funny'   => '1',
+              'popular' => '2', 
+              'music'   => '3',
+              'sports'  => '4',
+            ); 
+        if(empty($cat_name)){
+            return $data;
+        } 
+        return isset($data[$cat_name]) ? $data[$cat_name] : ''; 
     }
 
      /**
@@ -32,6 +45,7 @@ class Base
         header("Status: 404 Not Found");  
         exit;  
     }
+
 
 
 

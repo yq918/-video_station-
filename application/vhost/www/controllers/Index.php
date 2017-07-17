@@ -38,7 +38,7 @@ class IndexController extends InitController {
             echo '<pre>';
          // print_r($data);
 
-            $data = $this->funny();
+            $data = $this->sports();
  
            print_r($data);
           exit; 
@@ -53,6 +53,7 @@ class IndexController extends InitController {
 		$data['popular'] = $this->popularNowadays();
 		$data['funny']   = $this->funny();
 		$data['music']   = $this->music(); 
+		$data['sports']  = $this->sports();
 		$this->getView()->assign("data", $data);
 		$this->assignOptions('index_index');
 

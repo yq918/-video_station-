@@ -13,6 +13,9 @@ use Base\Base;
 
 class Tools
 {
+    const SECRET = '13520v';
+    const SECRET_RIGHT = '520';
+    const ROUND_STR = 'ZXR';
     /**
      * style
      *
@@ -78,7 +81,13 @@ class Tools
      */
     public function parameterEncryption($str)
     {
-         $str = "13520v".$str."13520v";
+         if(is_numeric($str)){
+            $str = $str+100;
+         }
+         if(is_string($str)){
+             $str=$str.self::ROUND_STR;
+         }
+         $str = self::SECRET.$str.self::SECRET_RIGHT;
          $str = base64_encode( $str);
          return $str; 
     }
@@ -87,9 +96,28 @@ class Tools
     {
         $str = base64_decode($str);
         $str = substr($str,6);
-        $str = substr($str,0,-6); 
+        $str = substr($str,0,-3); 
+        if(is_numeric($str)){
+            return $str-100;
+        }
+        if(is_string($str)){
+            $str =  substr($str,0,-3); 
+        }
         return $str; 
     }
+
+/**
+   * [generateLinks description]
+   * @return [type] [description]
+   * 生成链接地址
+   */
+  public static function generateLinks($url,$param)
+  {
+     $link = Tools::parameterEncryption($param);
+     $linkUrl = $url.'?sing='.$link;
+     return $linkUrl;
+  }
+
 
 
   
