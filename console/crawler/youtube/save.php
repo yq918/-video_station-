@@ -7,10 +7,8 @@
 include '../../init.php';
 use models\db\db;
 use models\YoutuBe\youtube;
-class saveData{
-	const POPULAR = '2'; //时下流行
-	const MUSIC   = '3'; //音乐
-	const SPORTS  = '4'; //体育
+use models\Cat\Cat;
+class saveData{ 
 	public $req = array();
     public function run()
     {
@@ -18,23 +16,20 @@ class saveData{
 			  exit('数据为空');
 		}
 		$this->req = $_REQUEST;
-		$cat_id = isset($_REQUEST['cat_id']) ? $_REQUEST['cat_id'] : 2;
-		switch($cat_id) {
-			case  self::POPULAR:
-				$data =  $this->popularNowadays();
-				break;
-			case self::MUSIC  :
-			case self::SPORTS :
-				$data = $this->musicData($cat_id);
-				break;
+		 
+	    $data = $this->collatingData($cat_id);   
+		if( !isset($data['category_id']) || empty($data['category_id'])){
+           exit('分类ID为空');
 		}
+
 		$youtubeObj = new youtube();
 		$addYoutubeData = array(
 			'video_url'   => $data['video_url'],
 			'video_title' => $data['video_title'],
 			'video_cover' => $data['video_cover'],
 			'cat_id'      => $data['cat_id'],
-			'add_time' => time()
+			'category_id' => $data['category_id'],
+			'add_time'    => time()
 		);
 		$lastId = $youtubeObj->addYoutubeData($addYoutubeData);
 		if($lastId){
@@ -48,55 +43,50 @@ class saveData{
 			$result = $youtubeObj->addDownloadData($downData);
 		}
 		return $result;
-  }
-
+   }
+     
 	/**
-	 * popularNowadays
+	 * collatingData
 	 *
-	 * [时下流行]
+	 * [整理写表的数据]
 	 * @author zhangxuanru  [zhangxuanru@eventmosh.com]
 	 */
-	public function popularNowadays()
-    {
-		$req = $this->req;
-		$data = [];
-		$filed = array('video_url','video_title','play_duration','video_time_content','playback_times','video_cover');
-		array_map(function($key) use (&$data,$req){
-			if(isset($req[$key]) && !empty($req[$key])){
-				$data[$key] = trim($req[$key]);
-			}
-		},$filed);
-		$str = str_replace(',','',$data['video_time_content']);
-		preg_match_all('/\d+/is',$str,$arr);
-		$data['playback_times']    = isset($arr[0][1]) ? $arr[0][1] : 0;
-		$data['add_time'] = time();
-		$data['cat_id'] = 2;
-		return $data;
-    }
-
-	/**
-	 * musicData
-	 *
-	 * [音乐]
-	 * @author zhangxuanru  [zhangxuanru@eventmosh.com]
-	 */
-	public function musicData($cat_id)
+	public function collatingData($cat_id)
 	{
 		$req = $this->req;
-        $play_time = isset($req['play_time']) ? trim($req['play_time']) : 0;
-		if(!empty($play_time)){
-			$play_time = str_replace(array(' - 时长：','秒','时长','。'),'',$play_time);
-			$play_time = str_replace('分钟',':',$play_time);
-		}
-		$data['add_time'] = time();
-		$data['video_url'] = isset($req['href']) ? $req['href'] : '';
-		$data['video_title'] = isset($req['title']) ? $req['title'] : '';
+        $play_time = isset($req['play_time']) ? strip_tags($req['play_time']) : 0; 
+		$data['cat_title']     = isset($req['cat_title']) ? trim($req['cat_title']) : '' ; 
+		$data['video_url']     = isset($req['href']) ? $req['href'] : '';
+		$data['video_title']   = isset($req['title']) ? $req['title'] : '';
 		$data['play_duration'] = trim($play_time);
 		$data['video_time_content'] = isset($req['playback_times']) ? trim(strip_tags($req['playback_times'] )): '';
-		$data['video_cover'] = isset($req['imgaddress']) ? $req['imgaddress'] : '';
-		$data['cat_id'] = $cat_id;
+		$data['video_cover'] = isset($req['imgaddress']) ? $req['imgaddress'] : ''; 
+		$data['category_id'] = $this->getCartGroyId($data['cat_title'],$cat_id);
+		$data['cat_id'] = $cat_id; 
 	    return  $data;
 	}
+
+   
+   //查询具体分类ID
+   public function getCartGroyId($cat_title = '',$pid = 0)
+   {
+   	if(empty($cat_title)){
+   		 return 0;
+   	} 
+   	$catObj = new Cat();
+   	$where = " category='{$cat_title}' "
+   	$cat_data = $catObj->getCatData('id',$where);
+   	if(empty($cat_data)){
+         $addData = array(
+              'pid' => $pid,
+              'category' => $cat_title 
+         	); 
+        $id =  $catObj->addCatData($addData);
+        return $id; 
+   	} 
+      return $cat_data[0]['id']; 
+   } 
+
 }
 
 $class = new saveData();
