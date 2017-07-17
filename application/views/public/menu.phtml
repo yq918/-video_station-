@@ -1,0 +1,30 @@
+  <div class="col-sm-3 col-md-2 sidebar">
+			<div class="top-navigation">
+				<div class="t-menu">MENU</div>
+				<div class="t-img">
+					<img src="http://static.13520v.com/images/lines.png" alt="" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+				<div class="drop-navigation drop-navigation">
+				  <ul class="nav nav-sidebar">
+				  <?php  foreach ($menu as $key => $value) { ?>
+				      <li><a href="<?php echo $value['link']; ?>" class="<?php echo $value['class'] ?>"><span class="<?php echo $value['spanClass'] ?>" aria-hidden="true"></span><?php echo $value['title']; ?></a></li>
+				  <?php }?>  
+				  </ul>
+				 
+					<div class="side-bottom">
+						<div class="side-bottom-icons">
+							<ul class="nav2">
+								<li><a href="#" class="facebook"> </a></li>
+								<li><a href="#" class="facebook twitter"> </a></li>
+								<li><a href="#" class="facebook chrome"> </a></li>
+								<li><a href="#" class="facebook dribbble"> </a></li>
+							</ul>
+						</div>
+						<div class="copyright">
+							<p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="/">Black Dog Videos</a></p>
+						</div>
+					</div>
+				</div>
+        </div>
