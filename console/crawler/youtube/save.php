@@ -44,7 +44,7 @@ class saveData{
 		}
 		return $result;
    }
-     
+
 	/**
 	 * collatingData
 	 *
@@ -74,7 +74,7 @@ class saveData{
    		 return 0;
    	} 
    	$catObj = new Cat();
-   	$where = " category='{$cat_title}' "
+   	$where = " category='{$cat_title}' ";
    	$cat_data = $catObj->getCatData('id',$where);
    	if(empty($cat_data)){
          $addData = array(
