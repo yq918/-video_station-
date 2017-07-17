@@ -16,8 +16,8 @@ class saveData{
 			  exit('数据为空');
 		}
 		$this->req = $_REQUEST;
-		 
-	    $data = $this->collatingData($cat_id);   
+		$cat_id = isset($_REQUEST['cat_id']) ? $_REQUEST['cat_id'] : 0; 
+	    $data   = $this->collatingData($cat_id);   
 		if( !isset($data['category_id']) || empty($data['category_id'])){
            exit('分类ID为空');
 		}
