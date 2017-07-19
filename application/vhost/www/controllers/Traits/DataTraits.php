@@ -128,23 +128,18 @@ trait DataTraits{
    * @return [type] [description]
    *栏目页当下流行栏目  
    */ 
-    public function showsPopularNowadays()
-    { 
-        $cat_id = Base::getCatTypeData('popular'); 
-        echo $cat_id;
-        $data   = $this->_Youtube->showsDetailsVideo($cat_id,0,16); 
-
-echo " <pre>";
-         print_r($data);
-         exit;
-
-
-        $constant = Base::getConstant();
+    public function showsDetailsVideo($cat_id)
+    {    
+        $data   = $this->_Youtube->showsDetailsVideo($cat_id,0,16);  
+        $constant = Base::getConstant(); 
         foreach($data as $key => &$val){
-                $val['img_url'] = $this->generatePictureLinks($val['image_file_name'],2);
-                $val['author'] = 'Small stone'; 
-                $val['link'] =  Tools::generateLinks('/single/',$val['id']); 
-        }
+             foreach ($val['list'] as $index => &$value) {
+                 $value['img_url'] = $this->generatePictureLinks($value['image_file_name'],2);
+                 $value['author'] = 'Small stone'; 
+                 $value['link'] =  Tools::generateLinks('/single/',$value['id']); 
+                 $value['play_duration'] = $this->timeReplacement($value['play_duration']);
+             } 
+        } 
         return $data;
     }
 

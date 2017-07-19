@@ -1,7 +1,7 @@
 <?php
 /**
  * @name ShowsController
- * @author root
+ * @author zxr
  * @desc 视频栏目控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
@@ -10,6 +10,7 @@ use Base\Tools;     //libary
 use controllers\Video\Youtube;
 use controllers\Video\Bili;
 use vhost\www\controllers\Traits\DataTraits; 
+use Base\Base;
  
  
 class ShowsController extends InitController {
@@ -33,19 +34,20 @@ class ShowsController extends InitController {
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
 	public function indexAction()
-	{ 
-
-        $this->showsPopularNowadays();
-		exit;
-		$data['popular'] = $this->popularNowadays();
-
-
-
-		$data['funny']   = $this->funny();
-		$data['music']   = $this->music(); 
-		$data['sports']  = $this->sports();
+	{  
+	   $sing = $this->getRequest()->getQuery("sing", "");
+	   $cat_id = Tools::parameterDecryption($sing); 
+	   if(empty($cat_id)){
+	   	     Base::notFound();
+	   }  
+        $data = $this->showsDetailsVideo($cat_id); 
 		$this->getView()->assign("data", $data);
 		$this->assignOptions('index_index');
+		$viewPath = VIEWPATH.'/www/shows/index.phtml';
+		if($cat_id ==  Base::getCatTypeData('music') ){
+             $viewPath = VIEWPATH.'/www/shows/movies.phtml';   
+		}
+		$this->getView()->display($viewPath);
 
 
 
@@ -86,7 +88,7 @@ class ShowsController extends InitController {
 
 		//var_dump($this->getView());exit;
  
-	    $this->getView()->display(VIEWPATH.'/www/index/index.phtml');
+	    
 
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
         //return true;

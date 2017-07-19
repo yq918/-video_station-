@@ -44,7 +44,7 @@ class Youtube
         $fields = array('where' => "img_upload=1 and video_upload=1 AND status=1 AND you_id in ({$you_id_str}) ",
                         'limit' => "{$start},{$limit}",
                         'order' => $order,
-                        'field' => 'id,video_title,play_duration,image_file_name,video_file_name,video_time_content',
+                        'field' => 'id,you_id,video_title,play_duration,image_file_name,video_file_name,video_time_content',
                         'table' => self::YOUTUBEDOWNTABLE);
         $you_data = $this->db->fList($fields);
         return array('code'=>self::RPC_COOD,'data' => $you_data,'y_data' => $data );
@@ -75,10 +75,9 @@ class Youtube
              $category_id  = $v['category_id'];
              $you_id  = $v['id'];
               foreach($data as $key => $val){
-                if($val['id'] == $you_id){
-                        $result[$category_id]['title'] = $cat_data[$category_id];
-                         $val['cat_title'] = $cat_data[$category_id];
-                         $result[$category_id][] = $val; 
+                if($val['you_id'] == $you_id){
+                        $result[$category_id]['title'] = $cat_data[$category_id]; 
+                        $result[$category_id]['list'][] = $val; 
                   }
               } 
          }
@@ -98,8 +97,7 @@ class Youtube
     * 获取具体的分类名称
     */
    public function getCategory($pid, $start= 0,$limit = 10 )
-   {
-
+   { 
      $fields = array('where'=>"pid={$pid} and status=1 ", 'limit'=>"{$start},{$limit}", 'order'=>' sort DESC ',  'field'=>'id,category', 'table'=> self::CATEGORYTABLE );
         $data =  $this->db->fList($fields);
         return array('code'=>self::RPC_COOD,'data' => $data); 

@@ -51,7 +51,10 @@ class Youtube{
     public function showsDetailsVideo($cat_id,$start,$limit,$order = 'sort DESC')
     {
         $data = $this->rpc_client->showsDetailsVideo($cat_id,$start,$limit,$order);
-        return $data; 
+       if($data['code'] == RpcClient::RPC_COOD ){
+            return $data['data']; 
+        }
+        return [];
     }
 
 
