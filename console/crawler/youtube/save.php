@@ -28,7 +28,7 @@ class saveData{
 			'video_title' => $data['video_title'],
 			'video_cover' => $data['video_cover'],
 			'cat_id'      => $data['cat_id'],
-			'category_id' => $data['category_id'],
+			'cat_column_id' => $data['cat_column_id'],
 			'add_time'    => time()
 		);
 		$lastId = $youtubeObj->addYoutubeData($addYoutubeData);
@@ -61,7 +61,7 @@ class saveData{
 		$data['play_duration'] = trim($play_time);
 		$data['video_time_content'] = isset($req['playback_times']) ? trim(strip_tags($req['playback_times'] )): '';
 		$data['video_cover'] = isset($req['imgaddress']) ? $req['imgaddress'] : ''; 
-		$data['category_id'] = $this->getCartGroyId($data['cat_title'],$cat_id);
+		$data['cat_column_id'] = $this->getCartGroyId($data['cat_title'],$cat_id);
 		$data['cat_id'] = $cat_id; 
 	    return  $data;
 	}
@@ -74,12 +74,12 @@ class saveData{
    		 return 0;
    	} 
    	$catObj = new Cat();
-   	$where = " category='{$cat_title}' ";
+   	$where = " column_name='{$cat_title}' ";
    	$cat_data = $catObj->getCatData('id',$where);
    	if(empty($cat_data)){
          $addData = array(
               'pid' => $pid,
-              'category' => $cat_title 
+              'column_name' => $cat_title 
          	); 
         $id =  $catObj->addCatData($addData);
         return $id; 

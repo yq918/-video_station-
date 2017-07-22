@@ -4,7 +4,7 @@ use models\db\db;
 
 class Cat{
 	 private   $conn = NULL;	
-	 private   $table = 'cra_category'; 
+	 private   $table = 'cra_cat_column'; 
 
      public function __construct() 
      {
