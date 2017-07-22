@@ -34,19 +34,21 @@ class ShowsController extends InitController {
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
 	public function indexAction()
-	{  
+	{    
 	   $sing = $this->getRequest()->getQuery("sing", "");
 	   $cat_id = Tools::parameterDecryption($sing); 
 	   if(empty($cat_id)){
 	   	     Base::notFound();
-	   }  
+	   }
+	    $category = $this->getCategory($cat_id);   
         $data = $this->showsDetailsVideo($cat_id); 
 		$this->getView()->assign("data", $data);
+		$this->getView()->assign("category",$category);
 		$this->assignOptions('index_index');
 		$viewPath = VIEWPATH.'/www/shows/index.phtml';
 		if($cat_id ==  Base::getCatTypeData('music') ){
              $viewPath = VIEWPATH.'/www/shows/movies.phtml';   
-		}
+		} 
 		$this->getView()->display($viewPath);
 
 
@@ -95,9 +97,12 @@ class ShowsController extends InitController {
 	}
 
 
-	public function singleAction()
+	public function detailAction()
 	{
-        echo 'aaaa';
+         $sing = $this->getRequest()->getQuery("sing", "");
+	     $cat_id = Tools::parameterDecryption($sing); 
+
+	     echo $cat_id;
 	}
 
 

@@ -49,7 +49,7 @@ class IndexController extends InitController {
      * 对于如下的例子, 当访问http://yourhost/www/index/index/index/name/root 的时候, 你就会发现不同
      */
 	public function indexAction()
-	{
+	{ 	 
 		$data['popular'] = $this->popularNowadays();
 		$data['funny']   = $this->funny();
 		$data['music']   = $this->music(); 

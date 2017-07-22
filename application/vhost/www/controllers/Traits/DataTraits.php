@@ -4,6 +4,9 @@ use Base\Tools;
 use Base\Base;
 
 trait DataTraits{
+
+    private static  $CAT_NUMBER = 5;
+
 	/**
 	 * [popularNowadays description]
 	 * @return [type] [description]
@@ -109,14 +112,18 @@ trait DataTraits{
    * @return [type]                  [description]
    * 生成图片地址
    */
-  public function generatePictureLinks($image_file_name,$cat_id)
+  public function generatePictureLinks($image_file_name,$cat_id,$zoom = false,$widht = 0,$height = 0)
   {
      $constant = Base::getConstant();
      $domain   = $constant['static_you_images'];
      if($cat_id == '1'){
         $domain = $constant['static_bili_images'];
      }
-     $img_url = $domain.'/'.$image_file_name.'?v='.$constant['static_version'];
+     $zoomStr = "";
+     if($zoom){
+         $zoomStr = '&imageView2/1/w/'.$widht.'/h/'.$height.'/q/80|imageslim';
+     } 
+     $img_url = $domain.'/'.$image_file_name.'?v='.$constant['static_version'].$zoomStr;
      return $img_url;
   } 
 
@@ -130,17 +137,49 @@ trait DataTraits{
    */ 
     public function showsDetailsVideo($cat_id)
     {    
-        $data   = $this->_Youtube->showsDetailsVideo($cat_id,0,16);  
+        $data     = $this->_Youtube->showsDetailsVideo($cat_id,0,16,self::$CAT_NUMBER);    
         $constant = Base::getConstant(); 
-        foreach($data as $key => &$val){
-             foreach ($val['list'] as $index => &$value) {
-                 $value['img_url'] = $this->generatePictureLinks($value['image_file_name'],2);
+        foreach($data as $key => &$val){               
+              $val['link'] =Tools::generateLinks('/shows/detail/',$cat_id.'_'.$key);  
+             foreach ($val['list'] as $index => &$value) { 
+                  $zoom   = false; 
+                  $width  = 0;
+                  $height = 0;
+                 switch ($cat_id) {
+                   case '3':
+                     $zoom  = true;
+                     $width = 250;
+                     $height = 372;
+                     break; 
+                 } 
+             $value['img_url'] = $this->generatePictureLinks($value['image_file_name'],$cat_id,$zoom,$width,$height); 
                  $value['author'] = 'Small stone'; 
                  $value['link'] =  Tools::generateLinks('/single/',$value['id']); 
                  $value['play_duration'] = $this->timeReplacement($value['play_duration']);
              } 
         } 
         return $data;
+    }
+
+
+    /**
+     * [getCategory description]
+     * @param  [type] $cat_id [description]
+     * @return [type]         [description]
+     * 获取分类数据
+     */
+    public function getCategory($cat_id)
+    {
+       $cateData = $this->_Youtube->getCategory($cat_id,self::$CAT_NUMBER,10); 
+       if(!empty($cateData)){
+          foreach ($cateData as $key => $value) {
+             $value['link'] = Tools::generateLinks('/shows/detail/',$cat_id.'_'.$value['id']); 
+             $value['column_name'] = trim($value['column_name']);
+             $value['short_name']  = mb_substr($value['column_name'] ,0,12)."...";
+             $cateData[$key] = $value;
+            } 
+       }  
+       return $cateData; 
     }
 
 

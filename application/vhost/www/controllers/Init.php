@@ -23,7 +23,7 @@ class InitController extends Yaf\Controller_Abstract {
      * [默认执行的方法]
      * @author zhangxuanru  [zhangxuanru@eventmosh.com]
      */
-    public function init(){
+    public function init(){ 
         // 关闭自动渲染模板
         //Yaf\Dispatcher::getInstance()->disableView();
         Yaf\Dispatcher::getInstance()->disableView();
