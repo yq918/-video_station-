@@ -1,0 +1,61 @@
+<?php echo Yaf\View\Simple::render(VIEWPATH . '/public/header.phtml');?> 
+  <body>  
+       <?php echo Yaf\View\Simple::render(VIEWPATH.'/public/login.phtml');?> 
+         
+        <?php echo Yaf\View\Simple::render(VIEWPATH . '/public/menu.phtml'); ?> 
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="main-grids"> 
+				<div class="recommended">
+					<div class="recommended-grids english-grid">
+						<div class="recommended-info">
+							<div class="heading">
+								<h3>搜索结果</h3>
+							</div>
+							<div class="heading-right">
+								 
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+
+                       <?php foreach ($data as $k => $v) { 
+                       	      $style = '';
+                                if($k >= 6 ){
+                                	 $style = " margin-top:30px;";
+                                }
+                       	?>  
+						<div class="col-md-2 resent-grid recommended-grid sports-recommended-grid" style="<?php echo $style; ?>" >
+							<div class="resent-grid-img recommended-grid-img">
+								<a href="<?php echo $v['link']; ?>"><img src="<?php echo $v['img_url']; ?>" alt="<?php echo $v['video_title']; ?>" title="<?php echo $v['video_title']; ?>"/></a>
+								 
+							</div>
+							<div class="resent-grid-info recommended-grid-info">
+								<h5><a href="<?php echo $v['link']; ?>" class="title" alt="<?php echo $v['video_title']; ?>"><?php echo $v['video_title']; ?></a></h5>
+								<p class="author"><a href="<?php echo $v['link']; ?>" class="author"><?php echo $v['author']; ?></a></p>
+								<p class="views"><?php echo $v['play_time']; ?> views</p>
+							</div>
+						</div>
+
+                    <?php  }?>
+						 
+						<div class="clearfix"> </div>
+					</div>
+				</div> 
+		      
+
+			</div>
+			
+			<!-- footer --> 
+            <?php echo Yaf\View\Simple::render(VIEWPATH . '/public/footer.phtml');?> 
+			<!-- //footer -->
+
+		</div>
+		<div class="clearfix"> </div>
+	<div class="drop-menu">
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
+		  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
+		  <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled link</a></li>
+		  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+		</ul>
+	</div> 
+  </body>
+</html>

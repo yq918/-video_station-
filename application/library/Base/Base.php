@@ -39,7 +39,7 @@ class Base
       * @return [type] [description]
       * 手动给404页面
       */
-    public function notFound()
+    public static function notFound()
     {
         header("HTTP/1.1 404 Not Found");  
         header("Status: 404 Not Found");  

@@ -4,31 +4,30 @@
  * @author root
  * @desc 详情页控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
- */
-
- 
-use Aa\Bb;           //libary
+ */ 
 use Base\Tools;     //libary
-use Base\Base;
-use models\Aa\SampleModel; //models
-
+use Base\Base; 
 use controllers\Video\Youtube;
 use controllers\Video\Bili;
-use vhost\www\controllers\Traits\DataTraits; 
- 
+use vhost\www\controllers\Traits\DataTraits;  
+use vhost\www\controllers\Traits\UserTraits; 
+use controllers\Cat\Category;
  
 class SingleController extends InitController {
 
 	use DataTraits;
+	use UserTraits;
 
 	public  $constant = null ;
 	public  $_Youtube = null;
 	public  $_Bili    = null;
+	private $_Cat     = null;
 
 	public function init(){
 		      parent::init();
 		      $this->_Youtube = new Youtube();
 		      $this->_Bili    = new Bili();
+		      $this->_Cat     = new Category();
 	} 
 
 	/** 
@@ -39,47 +38,23 @@ class SingleController extends InitController {
 	public function indexAction()
 	{
 		$sing = $this->getRequest()->getQuery("sing", "");
-		if(empty($sing)){
+		$type = $this->getRequest()->getQuery("type", "");
+		if(empty($sing) || empty($type)) {
                 Base::notFound();
 		  }
-       $id  = Tools::parameterDecryption($sing); 
- 
+        $id   = Tools::parameterDecryption($sing); 
+        $type = Tools::parameterDecryption($type);  
+        $detail = $this->getVideoDataById($id,$type);
+        if(empty( $detail)){
+        	 Base::notFound();
+        }  
+        $formKey = $this->generateSessionKey(); 
         $this->assignOptions('single_index');
-	    $this->getView()->display(VIEWPATH.'/www/index/single.phtml');
-
-		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
-        //return true;
+        $this->getView()->assign('detail',$detail);
+        $this->getView()->assign('id',$id);
+        $this->getView()->assign('type',$type); 
+        $this->getView()->assign('formKey',$formKey);
+	    $this->getView()->display(VIEWPATH.'/www/single/single.phtml'); 
 	}
-
-
-	public function singleAction()
-	{
-        echo 'aaaa';
-	}
-
-
-
-	public function testAction()
-	{
-
-		$s = new \swoole_server();
-		$s->after();
-
-		echo 'test';
-		return false;
-	}
-
-
-	public function abcAction()
-	{
-//		$database = YaConf::get('Mdatabases.db');
-//
-//		print_r($database);
-//		exit;
-
-
-		echo __FUNCTION__;
-		return false;
-	}
-
+ 
 }

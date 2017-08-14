@@ -15,6 +15,7 @@ trait StaticConf{
                    ),
                    'script' => array(
                        //'/js/common/jquery-1.11.1.min.js'
+                       //'/js/user.js'
                       )
                ),
 
@@ -35,7 +36,7 @@ trait StaticConf{
                             '/js/bootstrap.min.js',
 
                     ),
-                    'title' => '开心一刻',
+                    'title' => '黑狗视频,个人视频,youtube视频,最新 最热 最爱的国外视频',
                     'keywords' => '',
                     'description' => '',
                 ),
@@ -48,6 +49,7 @@ trait StaticConf{
                             '/js/jquery.magnific-popup.js',
                             '/js/responsiveslides.min.js',  
                             '/js/bootstrap.min.js',
+                            '/js/user.js'
                           )
                 ),
 

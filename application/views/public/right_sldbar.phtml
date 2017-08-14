@@ -1,0 +1,13 @@
+<div class="col-md-2 show-grid-right">
+					<h3>Recommend</h3>
+
+					<?php foreach ($category as $key => $value) { ?> 
+					<div class="show-right-grids">
+						<ul>
+							<li class="tv-img"><a href="#"><img src="<?php echo $static_url; ?>/images/mv.png" alt="" /></a></li>
+							<li><a href="<?php echo $value['link']; ?>" title="<?php echo $value['column_name']; ?>"><?php echo $value['short_name']; ?></a></li>
+						</ul>
+					</div>
+	             <?php } ?>
+				</div>
+ <div class="clearfix"> </div>

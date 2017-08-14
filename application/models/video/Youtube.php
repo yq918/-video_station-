@@ -2,18 +2,69 @@
 namespace video;
 use Db\Db;
 use Base\Base;
-
+use Cat\Category;
 class Youtube
 {
     private  $db;
+    private $_cat;
     const YOUTUBETABLE     = 'youtube';
     const YOUTUBEDOWNTABLE = 'cra_youtube_download';
-    const CATEGORYTABLE    = 'cra_cat_column';
+     
     
     public function __construct()
     {
         $this->db =  Db::instance();
+        $this->_cat = new Category();
     }
+
+    /**
+     * [getYoutubeVideoList description]
+     * @param  [type] $cat_id [description]
+     * @param  [type] $start  [description]
+     * @param  [type] $limit  [description]
+     * @param  [type] $order  [description]
+     * @param  string $where  [description]
+     * @return [type]         [description]
+     * 获取youtube视频列表
+     */
+    public function getYoutubeVideoList($cat_id,$start,$limit,$order,$where = '')
+    {
+        $fields = array(
+             'where'=>"video_down=1 and video_img_down=1 AND status=1 AND cat_id={$cat_id} ", 
+             'limit'=> "{$start},{$limit}", 
+             'order'=> $order, 
+             'field'=>'id,cat_column_id',
+             'table'=> self::YOUTUBETABLE
+             );
+        if(!empty($where)){
+            $fields['where'] .= ' AND '.$where;
+        }
+        $data =  $this->db->fList($fields);
+        if(empty($data)){
+             return  Base::returnData( $data );   
+        }
+        $col_id_list = array_column($data,'cat_column_id','id');
+        $you_id_list = array_column($data,'id');
+        $you_id_str  = implode(',',$you_id_list);
+        $fields = array(
+            'where' => "img_upload=1 and video_upload=1 AND status=1 AND you_id in ({$you_id_str}) ",
+            'limit' => "{$start},{$limit}",
+            'order' => $order,
+            'field' => 'id,you_id,video_title,play_duration,image_file_name,video_file_name,video_time_content',
+           'table' => self::YOUTUBEDOWNTABLE
+                  );
+        $data = $this->db->fList($fields);  
+        foreach ($data as $key => &$value) {
+             $b_id = $value['you_id'];
+             $value['cat_column_id'] = isset($col_id_list[$b_id]) ? $col_id_list[$b_id] : 0; 
+             $value['id'] = $b_id;
+        } 
+        return  Base::returnData( $data );  
+    }
+
+
+
+
 
 
 
@@ -51,6 +102,7 @@ class Youtube
            $you_id = $value['you_id'];
            $value['cat_id'] = isset( $cat_id_list[$you_id] ) ? $cat_id_list[$you_id] : 0;
            $value['cat_column_id'] = isset( $cat_column_list[$you_id] ) ? $cat_column_list[$you_id] : 0;
+           $value['id'] = $you_id;
         } 
         return  Base::returnData( $rows );  
     }
@@ -132,8 +184,8 @@ class Youtube
     * 获取栏目详情数据 
     */
    public function showsDetailsVideo($cat_id,$start,$limit,$cat_number,$order)
-   { 
-          $category = $this->getCategory($cat_id,0,$cat_number); 
+   {  
+          $category = $this->_cat->getCategory($cat_id,0,$cat_number); 
           $category_data = isset( $category['data'] ) ? $category['data'] : [] ;  
 
           if(empty($category_data)){
@@ -159,6 +211,7 @@ class Youtube
          return  Base::returnData( $result ); 
    }  
 
+
   /**
    * [getColumnVideoData description]
    * @param  [type] $column_id [description]
@@ -175,27 +228,66 @@ class Youtube
    }
 
 
+    /**
+     * [getVideoDataById description]
+     * @param  [type] $id     [description]
+     * @param  string $fields [description]
+     * @return [type]         [description]
+     * 根据ID查询具体的数据
+     */
+    public function getVideoDataById($id,$field = '*')
+    { 
+          $fields = array(
+             'where' => "id={$id} ", 
+             'limit' => "0,1",  
+             'field' => 'id,cat_column_id,cat_id',
+             'table' => self::YOUTUBETABLE
+             );
+         $data = $this->db->fList($fields);
+         if(empty($data)){
+             return  Base::returnData( $data );  
+         }  
+        $col_id_list = array_column($data,'cat_column_id','id');
+        $cat_id_list = array_column($data,'cat_id','id'); 
+        $b_id_list   = array_column($data,'id');
+        $b_id_str    = implode(',',$b_id_list);  
+        $fields      = array(
+                        'where' => " you_id in ({$b_id_str}) ",
+                        'limit' => "0,1", 
+                        'field' => $field ,
+                        'table' => self::YOUTUBEDOWNTABLE
+                        );
+          $b_data = $this->db->fList($fields);   
+          foreach ($b_data as $key => &$value) {
+             $b_id = $value['you_id'];
+             $value['cat_column_id'] = isset($col_id_list[$b_id]) ? $col_id_list[$b_id] : 0; 
+             $value['cat_id'] = isset($cat_id_list[$b_id]) ? $cat_id_list[$b_id] : 0; 
+             $value['id'] = $b_id;
+         } 
+        return  Base::returnData( $b_data );   
+     } 
 
-   /**
-    * [getCategory description]
-    * @param  [type] $pid   [description]
-    * @param  [type] $start [description]
-    * @param  [type] $limit [description]
-    * @return [type]        [description]
-    * 获取具体的分类名称
-    */
-   public function getCategory($pid, $start= 0,$limit = 10,$order = 'sort DESC' )
-   { 
-     $fields = array( 'where'=>"pid={$pid} and status=1 ", 
-                      'limit'=>"{$start},{$limit}", 
-                      'order'=> $order,  
-                      'field'=>'id,pid,column_name', 
-                      'table'=> self::CATEGORYTABLE 
-                    );
-        $data =  $this->db->fList($fields);
-        return  Base::returnData( $data );   
-   } 
 
+
+      /**
+      * [getDataByWhere 根据条件获取数据]
+      * @param  string $where  [description]
+      * @param  string $fields [description]
+      * @return [type]         [description]
+      */
+    public function getDataByWhere($where='',$fields='*',$start = 0, $limit = 20)
+    { 
+          $fields = array(
+             'where' =>"{$where}",  
+             'field' => $fields,
+             'limit'=> "{$start},{$limit}",  
+             'table' => self::YOUTUBEDOWNTABLE
+             );
+         $data = $this->db->fList($fields);
+         return  Base::returnData( $data );   
+     }
+      
+      
 
 
 

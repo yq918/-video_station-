@@ -13,7 +13,7 @@ class Server {
 	* 配置文件
 	*/
 	protected $config = array(
-		'worker_num' => 50,
+		'worker_num' => 5,
 		'max_request' => 5000,
 		'dispatch_mode' => 3,
 		'open_length_check' => 1,

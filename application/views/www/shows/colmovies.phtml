@@ -1,0 +1,117 @@
+<?php echo Yaf\View\Simple::render(VIEWPATH . '/public/header.phtml');?> 
+  <body> 
+       <?php echo Yaf\View\Simple::render(VIEWPATH.'/public/login.phtml');?> 
+
+		 
+	   <?php echo Yaf\View\Simple::render(VIEWPATH . '/public/menu.phtml'); ?> 
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="show-top-grids">
+				<div class="col-sm-10 show-grid-left main-grids"> 
+                 <?php if(!empty($columnDatail) && !empty($columnDatail['list'])){ ?>
+                 <div class="recommended">
+						<div class="recommended-grids english-grid">
+							<div class="recommended-info">
+								<div class="heading">
+									<h3><a href="<?php echo $columnDatail['cat_list']['link']; ?>"><?php echo $columnDatail['cat_list']['column_name']; ?></a></h3>
+								</div>
+								<div class="heading-right">
+									 
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+                      <?php foreach ($columnDatail['list'] as $k => $val) { 
+                               if($k == 4){
+                                  	break;
+                               }
+                      	 ?> 
+							<div class="col-md-3 resent-grid recommended-grid movie-video-grid">
+								<div class="resent-grid-img recommended-grid-img">
+									<a href="<?php echo $val['link'];?>"><img src="<?php echo $val['img_url']; ?>" alt="<?php echo $val['video_title']; ?>" /></a>
+									<div class="time small-time show-time movie-time">
+										<p><?php echo $val['play_duration']?></p>
+									</div>
+									<div class="clck movie-clock">
+										<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="resent-grid-info recommended-grid-info recommended-grid-movie-info">
+									<h5><a href="single.html" class="title"><?php echo $val['video_title']?></a></h5>
+									<ul>
+										<li><p class="author author-info"><a href="<?php echo $val['link'];?>" class="author"><?php echo $val['author']?></a></p></li>
+										<li class="right-list"><p class="views views-info"><?php echo $val['video_time_content'];?></p></li>
+									</ul>
+								</div>
+							</div> 
+					   <?php } ?>
+
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+
+                 <?php } ?> 
+                 
+
+				 <?php foreach ($data as $key => $value) { ?> 
+					<div class="recommended">
+						<div class="recommended-grids english-grid">
+							<div class="recommended-info">
+								<div class="heading">
+									<h3><a href="<?php echo $value['link']; ?>"><?php echo $value['title']; ?></a></h3>
+								</div>
+								<div class="heading-right">
+									 
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+                      <?php foreach ($value['list'] as $k => $val) { 
+                               if($k == 4){
+                                  	break;
+                               }
+                      	 ?> 
+							<div class="col-md-3 resent-grid recommended-grid movie-video-grid">
+								<div class="resent-grid-img recommended-grid-img">
+									<a href="<?php echo $val['link'];?>"><img src="<?php echo $val['img_url']; ?>" alt="<?php echo $val['video_title']; ?>" /></a>
+									<div class="time small-time show-time movie-time">
+										<p><?php echo $val['play_duration']?></p>
+									</div>
+									<div class="clck movie-clock">
+										<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="resent-grid-info recommended-grid-info recommended-grid-movie-info">
+									<h5><a href="single.html" class="title"><?php echo $val['video_title']?></a></h5>
+									<ul>
+										<li><p class="author author-info"><a href="<?php echo $val['link'];?>" class="author"><?php echo $val['author']?></a></p></li>
+										<li class="right-list"><p class="views views-info"><?php echo $val['video_time_content'];?></p></li>
+									</ul>
+								</div>
+							</div> 
+					   <?php } ?>
+
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				<?php } ?>	 
+
+				</div>
+
+				 <?php echo Yaf\View\Simple::render(VIEWPATH . '/public/right_sldbar.phtml');?> 
+
+
+			</div>
+			<!-- footer --> 
+            <?php echo Yaf\View\Simple::render(VIEWPATH . '/public/footer.phtml');?> 
+			<!-- //footer -->
+		</div>
+		<div class="clearfix"> </div>
+	<div class="drop-menu">
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
+		  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
+		  <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled link</a></li>
+		  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+		</ul>
+	</div>
+    
+  </body>
+</html>

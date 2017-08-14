@@ -27,7 +27,7 @@ class Base
     * @return [type]          [description]
     * 返回数据的格式
     */
-   public function returnData($data = array(),$msg = '',$status = 1)
+   public static function returnData($data = array(),$msg = '',$status = 1)
    {
     if($status){
         return array('code'=>self::RPC_COOD,'msg' => $msg,'data' => $data);

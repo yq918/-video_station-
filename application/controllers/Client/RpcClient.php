@@ -245,9 +245,7 @@ class RpcClient
 				}
 				$traceLine[] = '#' . $index . ' ' . $file . '(' . $line . '): ' . $class . $type .$function.'()';
 			}
-			$logData['trace'] = $traceLine;
-			$log_info = 'TIME:'.date('Y-m-d H:i:s',time()).' MSG['.json_encode($logData).']'."\r\n";
-			file_put_contents('/home/mosh/prolog/moshlog/'.$log_file,$log_info,FILE_APPEND);
+			$logData['trace'] = $traceLine; 
 		}
 		return $body;
 

@@ -8,4 +8,5 @@
 
 return array(
     'test_abc' => new Yaf\Route\Regex('#^/abc$#', ['controller' => 'Index', 'action' => 'abc'], []),
+    'transitPage' => new Yaf\Route\Regex('#^/transitpage/([a-zA-Z-_0-9]+)$#', ['controller' => 'Index', 'action' => 'transitPage'], [1=>'page']),
 );

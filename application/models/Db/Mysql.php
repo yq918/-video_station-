@@ -191,7 +191,7 @@ class Mysql{
     /**
      * Ìí¼Ó¼ÇÂ¼
      */
-    function insert($datas, $pReplace = false){
+    function insert($datas, $pReplace = false){ 
         if($this->_filter($datas)){
             if($this->exec(($pReplace? "REPLACE": "INSERT") . " INTO `$this->tablename`(`".join('`,`', array_keys($datas))."`) VALUES ('".join("','", $datas)."')")){
                 return $this->db->lastInsertId();
@@ -289,6 +289,8 @@ class Mysql{
         empty($tOpt['order']) || $tSql .= ' ORDER BY ' . $tOpt['order'];
         empty($tOpt['having']) || $tSql .= ' HAVING ' . $tOpt['having'];
         empty($tOpt['limit']) || $tSql .= ' LIMIT ' . $tOpt['limit'];
+
+        // echo $tSql;
         return $this->query($tSql);
     }
 
