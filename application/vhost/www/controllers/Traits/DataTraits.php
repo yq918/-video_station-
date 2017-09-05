@@ -251,9 +251,13 @@ trait DataTraits{
           if($c == 2){
              $limit = 12;
           }
-          if($c >= 3){
+          if($c == 3){
+            $limit = 8;
+          } 
+          if($c > 3){
             $limit = 6;
           }
+
           if(empty($img_width)){
             $img_width = 213;
           }

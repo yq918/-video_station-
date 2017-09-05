@@ -43,8 +43,8 @@ class ShowsController extends InitController {
 	   if(empty($cat_id)){
 	   	     Base::notFound();
 	   }	 
-	    $category = $this->getCategory($cat_id,self::$CAT_NUMBER);  
-        $data = $this->showsDetailsVideo($cat_id); 
+	    $category = $this->getCategory($cat_id);  
+        $data = $this->showsDetailsVideo($cat_id);  
 		$this->getView()->assign("data", $data);
 		$this->getView()->assign("category",$category);
 		$this->assignOptions('index_index');
@@ -67,7 +67,7 @@ class ShowsController extends InitController {
 	     	 Base::notFound();
 	     } 
 	     list($cat_id,$column_id) = explode('_',$sing); 
-	     $columnDatail = $this->showsColumnDetailsVideo($cat_id,$column_id,0,50);   
+	     $columnDatail = $this->showsColumnDetailsVideo($cat_id,$column_id,0,60);   
 	     $category = $this->getCategory($cat_id);   
 		 $this->getView()->assign("category",$category); 
 		 $this->getView()->assign("columnDatail", $columnDatail); 

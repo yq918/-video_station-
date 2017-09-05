@@ -37,8 +37,8 @@ trait StaticConf{
 
                     ),
                     'title' => '黑狗视频,个人视频,youtube视频,最新 最热 最爱的国外视频',
-                    'keywords' => '',
-                    'description' => '',
+                    'keywords' => 'python,php,爬虫,youtube',
+                    'description' => '个人爬虫网站',
                 ),
                
                'single_index' => array(
@@ -50,7 +50,10 @@ trait StaticConf{
                             '/js/responsiveslides.min.js',  
                             '/js/bootstrap.min.js',
                             '/js/user.js'
-                          )
+                          ),
+                    'title' => '个人视频网站,黑狗视频,个人视频,youtube视频,最新 最热 最爱的国外视频',
+                    'keywords' => 'python,php,爬虫,youtube,github',
+                    'description' => '我的个人爬虫网站',
                 ),
 
 
